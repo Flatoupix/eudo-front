@@ -7,7 +7,7 @@
           <img height="400" src="./components/images/logo.svg" class="mx-auto" />
         </v-row>
         <v-row class="mb-10">
-          <h2 class="mx-auto">Version 0.1.24</h2>
+          <h2 class="mx-auto">Version 0.1.25</h2>
         </v-row>
 
         <!-- <v-row class="align-center justify-space-around">
@@ -15,6 +15,7 @@
           <edn-load message="edn-load" form="simple" anim="blink"></edn-load>
           <edn-load message="edn-load" form="fill"></edn-load>
         </v-row> -->
+        <edn-file label="edn-file" multiple></edn-file>
         <edn-date-time label="edn-date-time-picard"></edn-date-time>
 
         <!-- <edn-num
@@ -25,7 +26,7 @@
         ></edn-num> -->
         <edn-field label="edn-field" v-model="urlString"></edn-field>
         <edn-url label="edn-url" v-model="urlString" readonly></edn-url>
-        <edn-copypaste label="edn-copypaste" v-model="copypasteString" readonly></edn-copypaste>
+        <edn-copy-paste label="edn-copy-paste" v-model="copypasteString" readonly></edn-copy-paste>
         <edn-cat label="edn-cat" v-model="selectedCat" :items="cat"></edn-cat>
         <edn-cat-x
           label="edn-cat-x"
@@ -35,7 +36,7 @@
         ></edn-cat-x>
         <edn-date ename="COL11_4545" v-model="dateInpt" label="edn-date" id="ef456" popup required />
 
-        <edn-time v-model="time" label="edn-time" required="Ce champs doit être rempli !" />
+        <edn-time v-model="time" label="edn-time" popup required="Ce champs doit être rempli !" />
         <v-row class="align-center justify-center">
           <edn-date v-model="dateInpt" :popup="false" :allowed-dates="allowedDates" class="mx-3" />
           <edn-time
@@ -46,12 +47,7 @@
             :slots="['00:20', '00:40', '01:20', '01:40', '02:40', '03:40', '04:40', '05:40', '06:40']"
           />
         </v-row>
-        <edn-memo
-          label="edn-memo"
-          html
-          v-model="inptMemo"
-          size="normal"
-        ></edn-memo>
+        <edn-memo label="edn-memo" html v-model="inptMemo" size="normal"></edn-memo>
         <edn-mail label="edn-mail" v-model="mail" :required="true" />
         <edn-phone label="edn-phone" v-model="phone" />
         <edn-check label="edn-check" v-model="checked" :required="true"></edn-check>
@@ -114,11 +110,11 @@ export default {
           value: '2',
         },
       ],
-      contentAbc: "abcdefghijklmnopqtrsuvwxyz",
-      date: "",
-      time: "",
-      phone: "",
-      urlString: "www.google.com",
+      contentAbc: 'abcdefghijklmnopqtrsuvwxyz',
+      date: '',
+      time: '',
+      phone: '',
+      urlString: 'www.google.com',
       copypasteString:
         '<script src="https://dev.eudonet.com/app/frm?tok=0D1BB1BA&cs=WLk7d-nU8RbrWpdMV7BlpeFzaizM5NzA&p=MMXJDpph5BKrGjAsUTHZoCl_H2ohON0ymyOapirv9fs%3d"/>',
       urlErrorUpdate: false,
