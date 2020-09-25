@@ -69,32 +69,33 @@ N'éspérez pas utiliser eudo-front sur un projet from scratch.
   - Etiquette
   - Séparateur
 - Les caractères
-  - `Champs - <edn-field>`
-  - `Catalogue <edn-cat>`
-  - `Choix multiple <edn-cat-x>`
-  - `Mémo <edn-memo>`
+  - [Champs `<edn-field/>`](#edn-field)
+  - [Catalogue `<edn-cat/>`](#edn-cat)
+  - [Choix multiple `<edn-cat-x>`](#edn-cat-x)
+  - [Mémo `<edn-memo>`](#edn-memo)
 - Les numériques
-  - `Numériques <edn-num>`
+  - [Numériques `<edn-num>`](#edn-num)
+  - [Téléphone `<edn-phone>`](#edn-phone)
 - Les temporels
-  - `Date <edn-date>`
-  - `Heure <edn-time>`
+  - [Date `<edn-date>`](#edn-date)
+  - [Heure `<edn-time>`](#edn-time)
+  - [Date et Heure `<edn-date-time>`](#edn-date-time)
 - Les cliquables
-  - `Radio <edn-radio>`
-  - `Checkboxes <edn-check>`
-  - `Switches <edn-switch>`
-  - `Bouton <edn-btn>`
-  - `Color-picker <edn-color>`
+  - [Radio `<edn-radio>`](#edn-radio)
+  - [Checkboxes `<edn-check>`](#edn-check)
+  - [Switches `<edn-switch>`](#edn-switch)
+  - [Bouton `<edn-btn>`](#edn-btn)
+  - [Color-picker `<edn-color>`](#edn-color)
 - Les coordonnées
-  - `Téléphone <edn-phone>`
-  - `E-Mail <edn-mail>`
-  - Réseau social
+  - [Téléphone `<edn-phone>`](#edn-phone)
+  - [E-Mail `<edn-mail>`](#edn-mail)
+  - Réseaux sociaux
   - Géolocalisation
 - Les visuels
   - Image
   - Graphique
-  - Page Web
-  - Lien Web
-  - Fichier
+  - [Page Web `<edn-url>`](#edn-url)
+  - [Fichier `<edn-file>`](#edn-file)
   - Loader
 - Les utilisateurs
   - Utilisateurs
@@ -102,7 +103,7 @@ N'éspérez pas utiliser eudo-front sur un projet from scratch.
 
 ---
 
-## Champs `<edn-field/>`
+## <a name="edn-field"></a> Champs `<edn-field/>`
 
 |    Paramètre     |       Type       |
 | :--------------: | :--------------: |
@@ -121,7 +122,7 @@ N'éspérez pas utiliser eudo-front sur un projet from scratch.
 
 ---
 
-## Catalogue `<edn-cat/>`
+## <a name="edn-cat"></a> Catalogue `<edn-cat/>`
 
 |    Paramètre     |       Type       |
 | :--------------: | :--------------: |
@@ -166,7 +167,7 @@ var oCities: [
 
 ---
 
-## Catalogue multiple `<edn-cat-x/>`
+## <a name="edn-cat-x"></a> Catalogue multiple `<edn-cat-x/>`
 
 |    Paramètre     |       Type       |
 | :--------------: | :--------------: |
@@ -184,7 +185,7 @@ var oCities: [
 
 ---
 
-## Mémo `<edn-memo/>`
+## <a name="edn-memo"></a> Mémo `<edn-memo/>`
 
 |    Paramètre     |       Type       |                                                   |
 | :--------------: | :--------------: | :-----------------------------------------------: |
@@ -204,7 +205,7 @@ var oCities: [
 
 ---
 
-## Bouton `<edn-btn/>`
+## <a name="edn-btn"></a> Bouton `<edn-btn/>` Bouton `<edn-btn/>`
 
 |    Paramètre    |       Type       |            |
 | :-------------: | :--------------: | :--------: |
@@ -228,7 +229,7 @@ var oCities: [
 
 ---
 
-## Numérique `<edn-num/>`
+## <a name="edn-num"></a> Numérique `<edn-num/>`
 
 |    Paramètre     |       Type       | Documentation |
 | :--------------: | :--------------: | :-----------: |
@@ -246,7 +247,24 @@ var oCities: [
 
 ---
 
-## Date `<edn-date/>`
+## <a name="edn-date"></a> Date `<edn-date/>`
+
+|    Paramètre     |       Type       |                     Documentation                     |
+| :--------------: | :--------------: | :---------------------------------------------------: |
+|   **tooltip:**   |     `String`     |                                                       |
+| **placeholder:** |     `String`     |                                                       |
+|    **label:**    |     `String`     |                                                       |
+|  **tripStyle:**  |    `Attribut`    |                                                       |
+|  **required:**   | `Bool ou String` |                                                       |
+|   **format:**    |     `String`     | [date-fns](https://date-fns.org/docs/Getting-Started) |
+
+#### Exemple
+
+```html
+<edn-date label="Choississez votre date de rendez-vous" format="DD-MM-YYYY" />
+```
+
+## <a name="edn-date-time"></a> Date et Time `<edn-date-time/>`
 
 |    Paramètre     |       Type       |                     Documentation                     |
 | :--------------: | :--------------: | :---------------------------------------------------: |
@@ -265,7 +283,7 @@ var oCities: [
 
 ---
 
-## Heure `<edn-time/>`
+## <a name="edn-time"></a> Heure `<edn-time/>`
 
 |   Paramètre    |       Type       |
 | :------------: | :--------------: |
@@ -285,7 +303,7 @@ var oCities: [
 
 ---
 
-## Heure `<edn-load/>`
+## <a name="edn-load"></a> Loader `<edn-load/>`
 
 |  Paramètre   |    Type    |            |
 | :----------: | :--------: | ---------- |
@@ -303,7 +321,7 @@ var oCities: [
 
 ---
 
-## Heure `<edn-radio/>`
+## <a name="edn-radio"></a> Radio `<edn-radio/>`
 
 |  Paramètre  |   Type   |     |
 | :---------: | :------: | --- |
@@ -318,7 +336,7 @@ var oCities: [
 
 ---
 
-## Téléphone `<edn-phone/>`
+## <a name="edn-phone"></a> Téléphone `<edn-phone/>`
 
 |    Paramètre     |   Type   |              |
 | :--------------: | :------: | :----------: |
@@ -336,7 +354,7 @@ var oCities: [
 
 ---
 
-## Heure `<edn-url/>`
+## <a name="edn-url"></a> Page web `<edn-url/>`
 
 |      Paramètre       |   Type   |                                  |
 | :------------------: | :------: | -------------------------------- |
@@ -383,7 +401,7 @@ var oCities: [
 
 ## </center>
 
-## E-mail `<edn-mail/>`
+## <a name="edn-mail"></a> E-mail `<edn-mail/>`
 
 |     Paramètre      |       Type       |     |
 | :----------------: | :--------------: | --- |
@@ -400,6 +418,31 @@ var oCities: [
 <edn-mail label="edn-mail"></edn-mail>
 ```
 
+## <a name='edn-copy-paste'></a> Copier-coller `<edn-copy-paste/>`
+
+|     Paramètre     |   Type   |     |
+| :---------------: | :------: | :-: |
+|   **tooltip:**    | `String` |     |
+| **placeholder:**  | `String` |     |
+|    **label:**     | `String` |     |
+|   **required:**   |  `Bool`  |     |
+| **conditionnal:** |  `Bool`  |     |
+|      **id:**      | `Number` |     |
+|    **order:**     | `Number` |     |
+|   **charsMax:**   | `Number` |     |
+|   **primary:**    |  `Hex`   |     |
+|  **secondary:**   |  `Hex`   |     |
+
+#### Exemple
+
+```html
+<edn-copy-paste :label="end-copy-paste" />
+```
+
+---
+
+---
+
 # Changelog
 
 #### @0.1.25
@@ -407,6 +450,11 @@ var oCities: [
 ### `<edn-file/>` _new_
 
 - Ajout du composant `<edn-file/>`
+-
+
+### `<edn-copy-paste/>` _new_
+
+- Ajout du composant `<edn-copy-paste/>`
 
 #### @0.1.24
 

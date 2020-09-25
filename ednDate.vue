@@ -2,26 +2,20 @@
   <v-menu
     ref="menu"
     v-model="menu"
-    :close-on-pick-click="false"
-    :return-value.sync="content"
+    :close-on-content-click="false"
     transition="fade-transition"
     offset-y
-    min-width="300"
+    min-width="300px"
+    :return-value.sync="content"
     v-if="$attrs.popup == true || $attrs.popup === ''"
   >
     <template v-slot:activator="{ on }">
       <v-text-field
-        :required="$attrs.required"
-        :ename="$attrs.ename"
-        :id="$attrs.id"
         :disabled="$attrs.disabled"
         :label="$attrs.label"
-        :value="content ? formattedDate : ''"
+        :value="content ? $format($parseISO(content), format) : ''"
         v-on="on"
-        v-on:click:append="menu=true"
         :rules="rules"
-        append-icon="mdi-calendar-range"
-        
       ></v-text-field>
     </template>
     <v-date-picker
@@ -40,7 +34,6 @@
   </v-menu>
   <v-date-picker
     v-else
-    :ename="$attrs.ename"
     :color="colors.primary"
     no-title
     scrollable
@@ -48,6 +41,7 @@
     v-model="content"
     :locale="'Fr'"
     :first-day-of-week="1"
+    :class="$attrs.tripStyle"
   ></v-date-picker>
 </template>
 <script>
@@ -73,12 +67,7 @@ export default {
       },
     }
   },
-  computed: {
-    formattedDate() {
-      return format(parseISO(this.content), this.format)
-    },
-  },
-  mounted() {
+  created() {
     this.$vuetify.theme.currentTheme.primary
     this.$format = format
     this.$parseISO = parseISO

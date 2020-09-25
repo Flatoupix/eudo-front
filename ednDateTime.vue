@@ -16,7 +16,6 @@
         @keyup.esc.native="userCancel"
         cols="5"
         :rules="rules"
-        v-model="getDateTime"
       >
         <v-col cols="3">
           <v-icon :color="currentTab === 0 && $refs.dateIn.isFocused ? getColorIcon : ''" class="mr-2"
@@ -56,7 +55,12 @@
           <v-icon>mdi-clock-time-four</v-icon>
         </v-tab>
         <v-tab-item>
-          <edn-date v-model="savedDate" @click.native="nextTab(savedDate)"></edn-date>
+          <edn-date
+            v-model="savedDate"
+            @click.native="nextTab(savedDate)"
+            :format="format"
+            @input="inputDate($event)"
+          ></edn-date>
         </v-tab-item>
         <v-tab-item>
           <edn-time no-title ref="timePicker" v-model="savedTime" @input="inputCheck($event)"></edn-time>
@@ -96,8 +100,8 @@ export default {
 
       currentTab: null, //Définit l'onglet courant
 
-      savedDate: null, //Stocke la date
-      savedTime: null, //Stocke l'heure
+      savedDate: this.value.split('T')[0], //Stocke la date
+      savedTime: this.value.split('T')[1].substr(0, 5), //Stocke l'heure en ne gardant que l'heure et les minutes
 
       colors: {
         //Définit les couleurs de vuetify
@@ -107,24 +111,8 @@ export default {
     }
   },
   computed: {
-    getDateTime: {
-      get() {
-        let date
-        let time
-
-        date = this.savedDate ? this.savedDate : ''
-
-        time = this.savedTime ? this.savedTime : ''
-
-        let formatedDate = new Date(date + 'T' + time)
-
-        this.content = formatedDate
-        return formatedDate
-      },
-      set() {},
-    },
     isValidTime() {
-      return isValid(new Date(this.savedDate + 'T' + this.savedTime))
+      return isValid(new Date(this.savedDate + 'T' + this.savedTime)) // Vérifie si le date time est valide.
     },
     getColorIcon() {
       if (this.menu) return this.colors.primary
@@ -132,12 +120,13 @@ export default {
   },
   mounted() {
     this.$vuetify.theme.currentTheme.primary
-    this.rules.push((v) => isValid(v) || this.invalidDateMsg)
+    this.rules.push((v) => isValid(v) || this.invalidDateMsg) // Règle poussée pour faire un callback en cas d'erreur de format.
   },
 
   methods: {
-    customFocus(bool, tab, e) {
-      if (e) this.currentField = e.target.id
+    customFocus(bool, tab) {
+      //bool : est-ce que le focus est actif
+      //tab : quel onglet est concerné
 
       this.$refs.dateIn.hasColor = bool
       this.$refs.dateIn.isFocused = bool
@@ -147,15 +136,22 @@ export default {
       }
     },
     nextTab(date) {
-      console.log(date)
+      //Switch d'onglet
 
       this.savedDate = date
       this.currentTab = 1
     },
+
     inputCheck(e) {
-      this.$refs.timePicker.resetSelect()
+      this.$refs.timePicker.resetSelect() //Permet d'envoyer un reset au timePicker
       if (e && e.includes(':')) this.$refs.timePicker.selectMin()
+      this.$emit('input', this.savedDate + ' ' + this.savedTime)
     },
+
+    inputDate(e) {
+      this.$emit('input', this.savedDate + ' ' + this.savedTime)
+    },
+
     userSave() {
       this.$refs.dTPkr.save(this.getDateTime)
       this.currentTab = null
