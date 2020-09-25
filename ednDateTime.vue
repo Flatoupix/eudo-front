@@ -17,6 +17,7 @@
         cols="5"
         :rules="rules"
       >
+        <label class="v-label v-label--active theme--light" style="position: absolute">{{ $attrs.label }}</label>
         <v-col cols="3">
           <v-icon :color="currentTab === 0 && $refs.dateIn.isFocused ? getColorIcon : ''" class="mr-2"
             >mdi-calendar-range</v-icon
@@ -47,7 +48,7 @@
       </v-input>
     </template>
     <v-card max-width="300" ref="dateTimePicard">
-      <v-tabs fixed-tabs v-model="currentTab" hide-slider>
+      <v-tabs fixed-tabs v-model="currentTab" hide-slider @keyup.esc="userCancel">
         <v-tab>
           <v-icon>mdi-calendar-range</v-icon>
         </v-tab>
@@ -157,11 +158,11 @@ export default {
       this.currentTab = null
       this.$refs.timePicker.resetSelect()
     },
-    userCancel() {
+    userCancel(key) {
       this.menu = false
       this.currentTab = 0
       this.savedDate = this.savedTime = null
-      this.$refs.timePicker.resetSelect('clear')
+      if (!key) this.$refs.timePicker.resetSelect('clear')
     },
   },
 }
@@ -171,4 +172,6 @@ div.dateTimeInput
   div.col
     display flex
     padding 0
+
+  label
 </style>

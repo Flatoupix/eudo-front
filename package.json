@@ -1,6 +1,6 @@
 {
   "name": "eudo-front",
-  "version": "0.1.22",
+  "version": "0.1.26",
   "description": "Framework eudonet",
   "main": "eudo-front.js",
   "author": "Pierre Nowak",
