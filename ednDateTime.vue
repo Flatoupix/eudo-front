@@ -101,8 +101,8 @@ export default {
 
       currentTab: null, //Définit l'onglet courant
 
-      savedDate: this.value.split('T')[0], //Stocke la date
-      savedTime: this.value.split('T')[1].substr(0, 5), //Stocke l'heure en ne gardant que l'heure et les minutes
+      savedDate: this.value != null && this.value != '' ? this.value.split('T')[0] : null, //Stocke la date
+      savedTime: this.value != null && this.value != '' ? this.value.split('T')[1].substr(0, 5) : null, //Stocke l'heure en ne gardant que l'heure et les minutes
 
       colors: {
         //Définit les couleurs de vuetify
