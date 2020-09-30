@@ -445,12 +445,17 @@ var oCities: [
 
 # Changelog
 
+#### @0.1.26
+
+- Ajout du placeholder pour `<edn-date/>`
+- Ajout du placeholder pour `<edn-date-time/>` côté Date
+- Suppression du placeholder 'format' dans `<edn-date-time/>`
+
 #### @0.1.25
 
 ### `<edn-file/>` _new_
 
 - Ajout du composant `<edn-file/>`
--
 
 ### `<edn-copy-paste/>` _new_
 

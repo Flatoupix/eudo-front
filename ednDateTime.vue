@@ -27,7 +27,7 @@
             type="text"
             v-model="savedDate"
             @focus="customFocus(true, 0)"
-            :placeholder="format"
+            :placeholder="$attrs.placeholder"
             @blur="customFocus(false)"
             v-on="menu == false ? on : null"
           />
@@ -58,7 +58,7 @@
         <v-tab-item>
           <edn-date
             v-model="savedDate"
-            @click.native="nextTab(savedDate)"
+            @input:date.native="nextTab(savedDate)"
             :format="format"
             @input="inputDate($event)"
           ></edn-date>
@@ -168,10 +168,12 @@ export default {
 }
 </script>
 <style lang="stylus">
-div.dateTimeInput
-  div.col
-    display flex
-    padding 0
+div.dateTimeInput {
+  div.col {
+    display: flex;
+    padding: 0;
+  }
 
-  label
+  label;
+}
 </style>
