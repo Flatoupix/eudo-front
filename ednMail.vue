@@ -28,8 +28,15 @@ export default {
   },
   mixins: [ednRequired, ednVModel],
   inheritAttrs: false,
-  mounted() {
-    this.rules.push((v) => this.pattern.test(v) || this.invalidMailMsg)
+  watch: {
+    value() {
+      if (this.value !== '') {
+        this.rules.push((v) => (v && this.pattern.test(v)) || this.invalidMailMsg)
+      } else if (this.value === '') {
+        this.rules.pop()
+      }
+    },
   },
+  mounted() {},
 }
 </script>

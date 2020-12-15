@@ -1,7 +1,6 @@
 <template>
   <v-radio-group v-model="content" :mandatory="false" v-bind="$attrs">
     <v-radio
-      :ripple="false"
       :color="$vuetify.theme.currentTheme.primary"
       :checked="radio.checked"
       :radios="radios"
@@ -14,17 +13,16 @@
 </template>
 
 <script>
-import { ednVModel } from "./mixins/ednVModel";
-
+import { ednVModel } from './mixins/ednVModel'
 
 export default {
   mixins: [ednVModel],
   props: {
     radios: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   inheritAttrs: false,
-};
+}
 </script>

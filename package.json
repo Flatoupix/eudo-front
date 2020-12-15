@@ -1,6 +1,6 @@
 {
   "name": "eudo-front",
-  "version": "0.1.26",
+  "version": "0.1.32",
   "description": "Framework eudonet",
   "main": "eudo-front.js",
   "author": "Pierre Nowak",
@@ -22,7 +22,7 @@
     "webpack": "^4.44.1"
   },
   "devDependencies": {
-    "date-fns": "^2.14.0",
+    "date-fns": "^2.16.1",
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2"
   }

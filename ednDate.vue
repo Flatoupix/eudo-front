@@ -11,15 +11,19 @@
   >
     <template v-slot:activator="{ on }">
       <v-text-field
+        :ename="$attrs.ename"
+        :id="$attrs.id"
         :disabled="$attrs.disabled"
         :label="$attrs.label"
-        :value="content ? $format($parseISO(content), format) : ''"
+        v-model="getFormattedDate"
         v-on="on"
         :rules="rules"
         :placeholder="$attrs.placeholder"
       ></v-text-field>
     </template>
     <v-date-picker
+      :ename="$attrs.ename"
+      :id="$attrs.id"
       :color="colors.primary"
       no-title
       scrollable
@@ -43,12 +47,13 @@
     :locale="'Fr'"
     :first-day-of-week="1"
     :class="$attrs.tripStyle"
+    @change="$emit('change', $event)"
   ></v-date-picker>
 </template>
 <script>
 import { ednRequired } from './mixins/ednRequired'
 import { ednVModel } from './mixins/ednVModel'
-import { format, parseISO } from 'date-fns'
+import { format as fnsFormat, parseISO as fnsParseISO, isValid as fnsIsValid, parse as fnsParse } from 'date-fns'
 
 export default {
   inheritAttrs: false,
@@ -68,56 +73,60 @@ export default {
       },
     }
   },
+  computed: {
+    getFormattedDate: {
+      get() {
+        if (this.content) {
+          console.log(fnsFormat(fnsParseISO(this.content), this.format))
+          return fnsFormat(fnsParseISO(this.content), this.format)
+        }
+      },
+      set(value) {
+        if (value !== '') {
+          return value
+        } else {
+          return ''
+        }
+      },
+    },
+  },
   created() {
     this.$vuetify.theme.currentTheme.primary
-    this.$format = format
-    this.$parseISO = parseISO
   },
-  methods: {},
 }
 </script>
 <style lang="stylus">
-div.tripStyle {
-  div.v-date-picker {
-    &-header {
-      background-color: #fafafa;
-    }
+div.tripStyle
+  div.v-date-picker
+    &-header
+      background-color #fafafa
 
-    &-table {
-      th {
-        color: black;
-      }
+    &-table
+      th
+        color black
 
-      button.v-btn {
-        &.v-btn--disabled {
-          background-color: transparent;
-          box-shadow: none;
-        }
+      button.v-btn
+        &.v-btn--disabled
+          background-color transparent
+          box-shadow none
 
-        &.v-date-picker-table__current {
-          border: none;
-          box-shadow: 0 1px 0 0 var(--v-primary-lighten1), inset 0 -1px 0 0 var(--v-primary-base);
-        }
+        &.v-date-picker-table__current
+          border none
+          box-shadow 0 1px 0 0 var(--v-primary-lighten1), inset 0 -1px 0 0 var(--v-primary-base)
 
-        &:hover {
-          &::before {
-            opacity: 0;
-          }
+        &:hover
+          &::before
+            opacity 0
 
-          margin-top: -1px;
-          box-shadow: 0 1px 0 0 #c5c5ca, inset 0 -1px 0 0 #4e4e56;
-        }
+          margin-top -1px
+          box-shadow 0 1px 0 0 #c5c5ca, inset 0 -1px 0 0 #4e4e56
 
-        background-color: white;
-        transition: all 0.3s;
-        box-shadow: 0 1px 0 0 #c5c5ca;
-        margin: 2px;
-        border-radius: 0.4em;
-      }
+        background-color white
+        transition all 0.3s
+        box-shadow 0 1px 0 0 #c5c5ca
+        margin 2px
+        border-radius 0.4em
 
-      background-color: #fafafa;
-      height: 275px;
-    }
-  }
-}
+      background-color #fafafa
+      height 275px
 </style>

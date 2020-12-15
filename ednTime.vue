@@ -32,7 +32,7 @@
         :disabled="$attrs.disabled"
         :label="$attrs.label"
         v-on="on"
-        v-on:click:append="menu=true"
+        v-on:click:append="menu = true"
         :rules="rules"
         append-icon="mdi-clock-time-four"
       ></v-text-field>
@@ -57,6 +57,7 @@
     v-bind="$attrs"
     close-on-content-click="false"
     v-model="content"
+    v-on="$listeners"
   >
   </v-time-picker>
 </template>
@@ -90,7 +91,7 @@ export default {
         this.content.splice(pos, 1)
       }
     },
-    resetSelect(param, e) {
+    resetSelect(param) {
       if (param === 'clear') this.content = ''
       this.$refs.timePicker.selecting = 1
     },
@@ -105,7 +106,26 @@ export default {
   &.tripStyle.v-card.v-sheet
     background-color #fafafa
 
-    @import 'assets/cstmVbtn'
+    button.v-btn, &.v-btn--disabled
+      background-color transparent
+      box-shadow none
+
+    &.v-date-picker-table__current
+      border none
+      box-shadow 0 1px 0 0 var(--v-primary-lighten1), inset 0 -1px 0 0 var(--v-primary-base)
+
+    &:hover
+      &::before
+        opacity 0
+
+      margin-top -1px
+      box-shadow 0 1px 0 0 #c5c5ca, inset 0 -1px 0 0 #4e4e56
+
+    background-color white
+    transition all 0.3s
+    box-shadow 0 1px 0 0 #c5c5ca
+    margin 2px
+    border-radius 0.4em
 
   button.v-btn.active.v-btn--contained.theme--light
     background-color var(--v-primary-base)

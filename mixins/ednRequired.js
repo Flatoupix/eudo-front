@@ -3,14 +3,13 @@ export const ednRequired = {
   data() {
     return {
       rules: this.$attrs.required ? this.isRequired() : [],
-    };
+    }
   },
   methods: {
     isRequired() {
-      if (typeof this.$attrs.required === "string")
-        return [(value) => !!value || this.$attrs.required];
-      else if (this.$attrs.required === true || this.$attrs.required == "")
-        return [(value) => !!value || "Merci de remplir ce champ"];
+      if (typeof this.$attrs.required === 'string') return [value => !!value || this.$attrs.required]
+      else if (this.$attrs.required === true || this.$attrs.required === '')
+        return [value => !!value || 'Merci de remplir ce champ']
     },
   },
-};
+}

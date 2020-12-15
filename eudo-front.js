@@ -19,6 +19,7 @@ import EdnCopyPaste from './ednCopyPaste'
 import EdnListMod from './ednListMod'
 import EdnDateTime from './ednDateTime'
 import EdnFile from './ednFile'
+import EdnPopOver from './ednPopOver'
 
 const eudoFront = {
   install(Vue) {
@@ -43,6 +44,7 @@ const eudoFront = {
     Vue.component('edn-list-mod', EdnListMod)
     Vue.component('edn-date-time', EdnDateTime)
     Vue.component('edn-file', EdnFile)
+    Vue.component('edn-pop-over', EdnPopOver)
   },
 }
 
@@ -68,6 +70,7 @@ export {
   EdnListMod,
   EdnDateTime,
   EdnFile,
+  EdnPopOver,
 }
 
 export default eudoFront

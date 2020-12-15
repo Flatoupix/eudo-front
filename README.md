@@ -237,12 +237,12 @@ var oCities: [
 | **placeholder:** |     `String`     |               |
 |    **label:**    |     `String`     |               |
 |  **required:**   | `Bool ou String` |               |
-|    **mask:**     |     `String`     | Voir exemple  |
+|   **pattern:**   |     `RegExp`     | Voir exemple  |
 
 #### Exemple
 
 ```html
-<edn-num :label="Revenu" mask="### ### ###,##" />
+<edn-num :label="Revenu" pattern="/[^.,0-9 ]/gm" />
 ```
 
 ---
@@ -443,9 +443,94 @@ var oCities: [
 
 ---
 
+## <a name='edn-file'></a> Envoie de fichier `<edn-file/>`
+
+|    Paramètre     |   Type   |                                                       |
+| :--------------: | :------: | :---------------------------------------------------: |
+|   **tooltip:**   | `String` |                                                       |
+| **placeholder:** | `String` |                                                       |
+|    **label:**    | `String` |                                                       |
+|  **required:**   |  `Bool`  |                                                       |
+|     **id:**      | `Number` |                                                       |
+|    **order:**    | `Number` |                                                       |
+|  **charsMax:**   | `Number` |                                                       |
+|   **primary:**   |  `Hex`   |                                                       |
+|  **secondary:**  |  `Hex`   |                                                       |
+|  **@getImage:**  |  `Blob`  | Récupèration d'une image sous forme de Blob en Base64 |
+| **@uploadFile:** |  `File`  |  Récupèration du type File pour l'envoyer au serveur  |
+
+#### Exemple
+
+```html
+<edn-file label="edn-file" @getImage="imageData = $event" @click:clear="imageData = null"></edn-file>
+<v-img v-if="imageData != null" :src="imageData" contain height="150"></v-img>
+```
+
+---
+
+---
+
 # Changelog
 
-#### @0.1.26
+#### @0.1.32
+
+### `<edn-file/>`
+
+- Ajoute edn-file dans eudo-front, voir desciption du composant.
+
+### `<edn-cat-x/>` **déprécié**
+
+- Désormais edn-cat-x sera déprécié au profit de l'attribut 'multiple' sur edn-cat
+
+### `<edn-cat/>`
+
+- Le catalogue passe en combobox avec l'attribut autocomplete
+
+### `<edn-date-time/>`
+
+- Correction de l'overflow qui aparait hors-champs où sur le champs.
+- Correction de l'impossibilité de cliquer en dehors du <edn-date-time/> lors de l'ouverture de ce dernier.
+- Correction d'un soucis de sauvegarde de valeur tant que les minutes n'ont pas été choisies.
+
+### `<edn-num/>`
+
+- La gestion des masks à été supprimée au profit d'une regex.
+- Mise à jour du comportement de <edn-num/>, dorénavant, il n'acceptera que ce set de caractère [^./d ] par le biais d'une regex modifiable.
+
+#### @0.1.31
+
+- Rétablissement du "ripple effect" sur les composant <edn-check/>, <edn-switch/> et <edn-radio/>
+
+#### @0.1.30
+
+### `<edn-date-time/>`
+
+- Correction de l'impossibilité de supprimer les dates
+
+### `<edn-check/>`
+
+- Correction du required qui n'était pas câblé sur le composant
+
+#### @0.1.29
+
+### `<edn-date/>`
+
+- Ajout de l'attribut `ename` et `id` sur <edn-date-time/> et <edn-date/>
+
+### `<edn-mail/>`
+
+- Désormais <edn-mail/> ne fera pas de vérification de format sur le champs est vide.
+
+#### @0.1.28
+
+- Correction de la définition du format sur l'<edn-date-time/>
+
+#### @0.1.27
+
+- Correction du comportement de `<edn-date-time/>` il n'y a plus qu'un bouton 'Ok'
+- Lorsque l'on choisi un mois, l'onglet ne change plus pour le time, pour ça, il faut définir une date.
+
+#### @0.1.26a
 
 - Ajout du placeholder pour `<edn-date/>`
 - Ajout du placeholder pour `<edn-date-time/>` côté Date
