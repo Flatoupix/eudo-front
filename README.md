@@ -71,7 +71,7 @@ N'éspérez pas utiliser eudo-front sur un projet from scratch.
 - Les caractères
   - [Champs `<edn-field/>`](#edn-field)
   - [Catalogue `<edn-cat/>`](#edn-cat)
-  - [Choix multiple `<edn-cat-x>`](#edn-cat-x)
+  - [Choix multiple `<edn-cat-x>`](#edn-cat-x) **déprécié**
   - [Mémo `<edn-memo>`](#edn-memo)
 - Les numériques
   - [Numériques `<edn-num>`](#edn-num)
@@ -471,6 +471,8 @@ var oCities: [
 ---
 
 # Changelog
+
+#### @0.1.33
 
 #### @0.1.32
 

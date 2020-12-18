@@ -1,10 +1,18 @@
 <template>
-  <v-combobox
+  <v-autocomplete
+    auto-complete="false"
     v-if="this.$attrs.autocomplete === true || this.$attrs.autocomplete === ''"
     :rules="rules"
     type="text"
     v-bind="$attrs"
+    v-model="content"
+    :items="$attrs.items"
   >
+    <template v-slot:selection="{ item }">
+      <v-chip outlined close label :input-value="item.selected" @click:close="remove(item)">
+        {{ item }}
+      </v-chip>
+    </template>
     <template v-slot:append-outer-icon v-if="tooltip">
       <v-tooltip top>
         <template v-slot:activator="{ on }">
@@ -13,8 +21,8 @@
         {{ tooltip }}
       </v-tooltip>
     </template>
-  </v-combobox>
-  <v-select v-else v-model="content" :rules="rules" type="text" v-bind="$attrs">
+  </v-autocomplete>
+  <v-select v-else :rules="rules" type="text" v-bind="$attrs" v-model="content" :items="$attrs.items">
     <template v-slot:append-outer-icon v-if="tooltip">
       <v-tooltip top>
         <template v-slot:activator="{ on }">
@@ -35,6 +43,12 @@ export default {
   inheritAttrs: false,
   props: {
     tooltip: String,
+  },
+  methods: {
+    remove(item) {
+      const index = this.content.indexOf(item)
+      if (index >= 0) this.content.splice(index, 1)
+    },
   },
 }
 </script>

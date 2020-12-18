@@ -5,7 +5,7 @@
     :rules="rules"
     :show-size="true"
     :accept="acceptFormat"
-    :value="value !== null || value !== undefined ? value : null"
+    :value="value instanceof Object && value.size > 0 ? value : undefined"
     @change="selectFile($event)"
     @click:clear="image = null"
     v-bind="$attrs"
@@ -18,12 +18,13 @@
 
 <script>
 import { ednRequired } from './mixins/ednRequired'
-import { ednVModel } from './mixins/ednVModel'
 
 export default {
   inheritAttrs: false,
-  mixins: [ednRequired, ednVModel],
+  mixins: [ednRequired],
   props: {
+    value: null,
+
     errorMsg: {
       type: String,
       default: () => '',
@@ -44,7 +45,22 @@ export default {
   data() {
     return {
       image: {},
+      content: this.value,
+      hasChanged: false,
     }
+  },
+  watch: {
+    content() {
+      this.$emit('input', this.content)
+    },
+    value() {
+      if (this.value != this.content) {
+        this.content = this.value
+      }
+      if (this.value instanceof Object) {
+        this.convertToBlob(this.value)
+      }
+    },
   },
   methods: {
     selectFile(file) {
@@ -52,17 +68,26 @@ export default {
       if (this.content) {
         //envoye value to parent
         this.$emit('uploadFile', this.content)
-        this.convertToBlob(this.content)
+
+        this.hasChanged = true
+        this.$emit('hasChanged', this.hasChanged)
       }
     },
     convertToBlob(img) {
-      const reader = new FileReader()
-      reader.readAsDataURL(img)
-      reader.onload = (e) => {
-        this.image = e.target.result
-        this.$emit('getImage', this.image)
+      if (img.size) {
+        const reader = new FileReader()
+        reader.readAsDataURL(img)
+        reader.onload = (e) => {
+          this.image = e.target.result
+          this.$emit('getImage', this.image)
+        }
       }
     },
+  },
+  mounted() {
+    if (typeof this.content === 'object') {
+      this.convertToBlob(this.content)
+    }
   },
 }
 </script>

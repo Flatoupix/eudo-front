@@ -1,12 +1,12 @@
 {
   "name": "eudo-front",
-  "version": "0.1.32",
+  "version": "0.1.38",
   "description": "Framework eudonet",
   "main": "eudo-front.js",
   "author": "Pierre Nowak",
   "license": "MIT",
   "scripts": {
-    "build": "vue build --target lib --name eudoFront eudo-front.js"
+    "build": "vue build --target lib --name eudoFront eudo-front.js "
   },
   "dependencies": {
     "highlight.js": "^10.1.2",
@@ -19,10 +19,10 @@
     "vue-template-compiler": "^2.6.11",
     "vue-the-mask": "^0.11.1",
     "vuetify-loader": "^1.4.4",
+    "date-fns": "^2.16.1",
     "webpack": "^4.44.1"
   },
   "devDependencies": {
-    "date-fns": "^2.16.1",
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2"
   }

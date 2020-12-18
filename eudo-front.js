@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import EdnField from './ednField'
 import EdnCat from './ednCat'
 import EdnCatX from './ednCatX'
@@ -21,8 +23,11 @@ import EdnDateTime from './ednDateTime'
 import EdnFile from './ednFile'
 import EdnPopOver from './ednPopOver'
 
+console.log('eudo-front version ' + require('./package.json').version)
+
 const eudoFront = {
   install(Vue) {
+    Vue.prototype.version = require('./package.json').version
     Vue.component('edn-field', EdnField)
     Vue.component('edn-cat', EdnCat)
     Vue.component('edn-cat-x', EdnCatX)
