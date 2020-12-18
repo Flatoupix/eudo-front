@@ -1,6 +1,6 @@
 <template>
   <v-autocomplete
-    auto-complete="false"
+    autocomplete="off"
     v-if="this.$attrs.autocomplete === true || this.$attrs.autocomplete === ''"
     :rules="rules"
     type="text"
@@ -10,7 +10,7 @@
   >
     <template v-slot:selection="{ item }">
       <v-chip outlined close label :input-value="item.selected" @click:close="remove(item)">
-        {{ item }}
+        {{ typeof item === 'object' ? item.text : item }}
       </v-chip>
     </template>
     <template v-slot:append-outer-icon v-if="tooltip">
@@ -46,7 +46,15 @@ export default {
   },
   methods: {
     remove(item) {
-      const index = this.content.indexOf(item)
+      console.log('delete')
+      let index = 0
+
+      if (typeof item === 'object') {
+        index = this.content.indexOf(item.value)
+      } else {
+        index = this.content.indexOf(item)
+      }
+
       if (index >= 0) this.content.splice(index, 1)
     },
   },
