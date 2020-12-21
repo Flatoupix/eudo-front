@@ -472,7 +472,12 @@ var oCities: [
 
 # Changelog
 
-#### @0.1.33
+#### @0.1.41
+
+### `<edn-cat/>`
+
+- edn-cat sera un automplete de base.
+- Changement de l'apparence des chips
 
 #### @0.1.32
 

@@ -1,13 +1,5 @@
 <template>
-  <v-autocomplete
-    autocomplete="off"
-    v-if="this.$attrs.autocomplete === true || this.$attrs.autocomplete === ''"
-    :rules="rules"
-    type="text"
-    v-bind="$attrs"
-    v-model="content"
-    :items="$attrs.items"
-  >
+  <v-autocomplete autocomplete="off" :rules="rules" type="text" v-bind="$attrs" v-model="content" :items="$attrs.items">
     <template v-slot:selection="{ item }">
       <v-chip outlined close label :input-value="item.selected" @click:close="remove(item)">
         {{ typeof item === 'object' ? item.text : item }}
@@ -22,16 +14,6 @@
       </v-tooltip>
     </template>
   </v-autocomplete>
-  <v-select v-else :rules="rules" type="text" v-bind="$attrs" v-model="content" :items="$attrs.items">
-    <template v-slot:append-outer-icon v-if="tooltip">
-      <v-tooltip top>
-        <template v-slot:activator="{ on }">
-          <v-icon v-on="on" style="cursor: pointer">mdi-help-circle-outline</v-icon>
-        </template>
-        {{ tooltip }}
-      </v-tooltip>
-    </template>
-  </v-select>
 </template>
 
 <script>

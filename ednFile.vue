@@ -8,6 +8,7 @@
     :value="value instanceof Object && value.size > 0 ? value : undefined"
     @change="selectFile($event)"
     @click:clear="image = null"
+    ref="fileUpload"
     v-bind="$attrs"
   >
     <template v-slot:selection="{ text }">
@@ -47,6 +48,10 @@ export default {
       image: {},
       content: this.value,
       hasChanged: false,
+      cachedFile: undefined,
+      cachedText: this.cachedFile
+        ? this.$refs.fileUpload.$el.children[1].children[0].children[0].children[1].innerText
+        : '',
     }
   },
   watch: {
@@ -54,7 +59,7 @@ export default {
       this.$emit('input', this.content)
     },
     value() {
-      if (this.value != this.content) {
+      if (this.value !== this.content) {
         this.content = this.value
       }
       if (this.value instanceof Object) {
@@ -64,13 +69,17 @@ export default {
   },
   methods: {
     selectFile(file) {
-      this.content = file
-      if (this.content) {
+      if (file) {
+        this.content = file
         //envoye value to parent
         this.$emit('uploadFile', this.content)
 
         this.hasChanged = true
         this.$emit('hasChanged', this.hasChanged)
+      } else {
+        if (this.content === this.cachedFile) {
+          this.content = this.cachedFile
+        }
       }
     },
     convertToBlob(img) {
