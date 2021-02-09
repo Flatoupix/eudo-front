@@ -2,7 +2,7 @@
   <v-autocomplete
     v-if="this.$attrs.multiple === true || this.$attrs.multiple === ''"
     autocomplete="off"
-    :rules="rules"
+    :rules="[value => !!value.length || 'Merci de remplir ce champ']"
     type="text"
     v-bind="$attrs"
     v-model="content"
@@ -22,7 +22,7 @@
       </v-tooltip>
     </template>
   </v-autocomplete>
-  <v-autocomplete v-else :rules="rules" type="text" v-bind="$attrs" v-model="content" :items="$attrs.items">
+  <v-select v-else :rules="rules" type="text" v-bind="$attrs" v-model="content" :items="$attrs.items">
     <template v-slot:append-outer-icon v-if="tooltip">
       <v-tooltip top>
         <template v-slot:activator="{ on }">
@@ -31,7 +31,7 @@
         {{ tooltip }}
       </v-tooltip>
     </template>
-  </v-autocomplete>
+  </v-select>
 </template>
 
 <script>

@@ -12,7 +12,9 @@
         <div class="mask">
           <div class="rect-left"></div>
           <div class="rect-top"></div>
-          <span><slot></slot></span>
+          <span>
+            <slot></slot>
+          </span>
         </div>
       </div>
     </v-btn>

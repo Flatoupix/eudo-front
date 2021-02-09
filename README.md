@@ -378,7 +378,7 @@ var oCities: [
 
 ## </center>
 
-## Heure `<edn-list-mod/>`
+## Mode liste `<edn-list-mod/>`
 
 |     Paramètre      |   Type   |                                              |
 | :----------------: | :------: | -------------------------------------------- |
@@ -403,14 +403,15 @@ var oCities: [
 
 ## <a name="edn-mail"></a> E-mail `<edn-mail/>`
 
-|     Paramètre      |       Type       |     |
-| :----------------: | :--------------: | --- |
-|     **label**      |     `String`     |     |
-|    **required**    | `Bool ou String` |     |
-| **invalidMailMsg** |     `String`     |     |
-|    **readonly**    |      `Bool`      |     |
-|    **disabled**    |      `Bool`      |     |
-|    **:pattern**    |      `Bool`      |     |
+|     Paramètre      |       Type       |                                                              |
+| :----------------: | :--------------: | ------------------------------------------------------------ |
+|     **label**      |     `String`     |                                                              |
+|    **required**    | `Bool ou String` |                                                              |
+|   **irisMimic**    |      `Bool`      | Imite le comportement des champs dans le nouveau mode fiche. |
+| **invalidMailMsg** |     `String`     |                                                              |
+|    **readonly**    |      `Bool`      |                                                              |
+|    **disabled**    |      `Bool`      |                                                              |
+|    **:pattern**    |      `Bool`      |                                                              |
 
 #### Exemple
 
@@ -468,9 +469,35 @@ var oCities: [
 
 ---
 
+## <a name="edn-goto"></a> Go to `<edn-goto/>`
+
+|   Paramètre   |   Type   |          Description          |
+| :-----------: | :------: | :---------------------------: |
+|  **label:**   | `String` |                               |
+| **linkMode:** | `String` | `'phone'` `'mail'` `'social'` `'url'` |
+
+#### Exemple
+
+```html
+<edn-goto label="edn-goto"></edn-goto>
+```
+
 ---
 
 # Changelog
+
+#### @0.1.43
+
+### Nouvel élement
+
+#### Ajout d'une feuille de style globale
+
+./assets/styles.styl
+
+### `<edn-goto/>` _new_
+
+- ajout des mimics Iris, sur les éléments suivants : `<edn-mail/>` et `<edn-phone/>`
+- Voir documentation ci-dessus
 
 #### @0.1.41
 

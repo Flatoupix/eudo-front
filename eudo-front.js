@@ -22,6 +22,8 @@ import EdnListMod from './ednListMod'
 import EdnDateTime from './ednDateTime'
 import EdnFile from './ednFile'
 import EdnPopOver from './ednPopOver'
+import EdnGoto from './ednGoto'
+require('./assets/styles.styl')
 
 console.log('eudo-front version ' + require('./package.json').version)
 
@@ -50,6 +52,7 @@ const eudoFront = {
     Vue.component('edn-date-time', EdnDateTime)
     Vue.component('edn-file', EdnFile)
     Vue.component('edn-pop-over', EdnPopOver)
+    Vue.component('edn-goto', EdnGoto)
   },
 }
 
@@ -76,6 +79,7 @@ export {
   EdnDateTime,
   EdnFile,
   EdnPopOver,
+  EdnGoto
 }
 
 export default eudoFront
