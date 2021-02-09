@@ -13,6 +13,7 @@
         <v-tooltip top>
           <template v-slot:activator="{ on }">
             <v-icon v-on="on" style="cursor: pointer">mdi-help-circle-outline</v-icon>
+            <v-icon v-on="on" style="cursor: pointer">mdi-help-circle-outline</v-icon>
           </template>
           {{ $attrs.tooltip }}
         </v-tooltip>
