@@ -486,6 +486,12 @@ var oCities: [
 
 # Changelog
 
+#### @0.1.44
+### `<edn-cat/>`
+
+- ajout de la mixins required pour les catalogues multiples, elle ne fait pas un verification de valeur mais de longueur.
+
+
 #### @0.1.43
 
 ### Nouvel élement

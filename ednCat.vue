@@ -2,7 +2,7 @@
   <v-autocomplete
     v-if="this.$attrs.multiple === true || this.$attrs.multiple === ''"
     autocomplete="off"
-    :rules="[value => !!value.length || 'Merci de remplir ce champ']"
+    :rules="rules"
     type="text"
     v-bind="$attrs"
     v-model="content"
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { ednRequired } from './mixins/ednRequired'
+import { ednRequired } from './mixins/ednRequiredMulti'
 import { ednVModel } from './mixins/ednVModel'
 
 export default {
