@@ -338,18 +338,29 @@ var oCities: [
 
 ## <a name="edn-phone"></a> Téléphone `<edn-phone/>`
 
-|    Paramètre     |   Type   |              |
-| :--------------: | :------: | :----------: |
-|   **tooltip:**   | `String` |              |
-| **placeholder:** | `String` |              |
-|    **label:**    | `String` |              |
-|  **required:**   |  `Bool`  |              |
-|    **mask:**     | `String` | Voir exemple |
+|    Paramètre     |   Type   |     |
+| :--------------: | :------: | :-: |
+|   **tooltip:**   | `String` |     |
+| **placeholder:** | `String` |     |
+|    **label:**    | `String` |     |
+|  **required:**   |  `Bool`  |     |
+|   **:pattern**   | `Regex`  |     |
+|  **:irisMimic**  |  `Bool`  |     |
+
+#### Format
+```
+(123) 456-7890
+(123)456-7890
+123-456-7890
+123.456.7890
+1234567890
++31636363634
+075-63546725
+```
 
 #### Exemple
-
 ```html
-<edn-phone :label="Votre numéro de téléphone" mask="+## (#) # ## ## ###" />
+<edn-phone :label="Votre numéro de téléphone"/>
 ```
 
 ---
@@ -411,7 +422,7 @@ var oCities: [
 | **invalidMailMsg** |     `String`     |                                                              |
 |    **readonly**    |      `Bool`      |                                                              |
 |    **disabled**    |      `Bool`      |                                                              |
-|    **:pattern**    |      `Bool`      |                                                              |
+|    **:pattern**    |     `Regex`      |                                                              |
 
 #### Exemple
 
@@ -471,9 +482,9 @@ var oCities: [
 
 ## <a name="edn-goto"></a> Go to `<edn-goto/>`
 
-|   Paramètre   |   Type   |          Description          |
-| :-----------: | :------: | :---------------------------: |
-|  **label:**   | `String` |                               |
+|   Paramètre   |   Type   |              Description              |
+| :-----------: | :------: | :-----------------------------------: |
+|  **label:**   | `String` |                                       |
 | **linkMode:** | `String` | `'phone'` `'mail'` `'social'` `'url'` |
 
 #### Exemple
@@ -486,11 +497,18 @@ var oCities: [
 
 # Changelog
 
+#### @0.1.45
+### `<edn-phone/>`
+- Suppression du v-mask
+- Ajout d'une Regex avec les formats les plus répandus
+- Ajout de la mimic Iris
+- Ajout de la possibilité de modifier la Regex
+
 #### @0.1.44
+
 ### `<edn-cat/>`
 
 - ajout de la mixins required pour les catalogues multiples, elle ne fait pas un verification de valeur mais de longueur.
-
 
 #### @0.1.43
 
