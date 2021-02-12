@@ -1,13 +1,15 @@
 <template>
   <div>
     <v-text-field
-      v-model="content"
-      v-if="!linkMode"
-      @blur="isMimic"
+      ref="edn_phone"
       @update:error="isReady($event)"
-      type="tel"
+      v-model="content"
+      type="phone"
+      @blur="isMimic"
       v-bind="$attrs"
       :rules="rules"
+      v-if="!linkMode"
+      :label="$attrs.label"
     >
       <template v-slot:append v-if="$attrs.tooltip">
         <v-tooltip top>
@@ -18,28 +20,17 @@
         </v-tooltip>
       </template>
     </v-text-field>
-    <edn-goto
-      v-else
-      @edit="
-        exit($event)
-        getFocus
-      "
-      linkMode="phone"
-      :label="$attrs.label"
-    >
-      {{ content }}
-    </edn-goto>
+    <edn-goto v-else @edit="exit($event);getFocus" linkMode="phone" :label="$attrs.label"> 
+       <template v-slot:editable>
+           {{ content }}
+       </template>  
+       </edn-goto>
   </div>
 </template>
 
 <script>
-import VueTheMask from 'vue-the-mask'
-import Vue from 'vue'
-
 import { ednRequired } from './mixins/ednRequired'
 import { ednVModel } from './mixins/ednVModel'
-
-Vue.use(VueTheMask)
 
 export default {
   props: {
@@ -51,18 +42,20 @@ export default {
       type: String,
       default: () => 'Vous devez entrer un numéro de téléphone valide.',
     },
-    mask: {
-      type: String,
-      default: () => '##.##.##.##.##',
+    pattern: {
+      type: RegExp,
+      default: () => /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
     },
   },
    data() {
     return {
       linkContent: '',
-      readyToConvert: null,
+      readyToConvert: true,
       linkMode: false,
     }
   },
+    mixins: [ednRequired, ednVModel],
+    inheritAttrs: false,
     methods: {
     changeToLink() {
       this.linkContent = this.content
@@ -71,21 +64,20 @@ export default {
       this.readyToConvert = !e
     },
     isMimic() {
-      this.linkMode = this.irisMimic && this.content.length > 0 && this.readyToConvert
+      this.linkMode = this.irisMimic && this.content?.length > 0 && this.readyToConvert
     },
     exit(e) {
        this.linkMode = e
     },
   },
-  mounted() {
-    this.rules.push((v) => /^[/\-.+()# 0-9]*$/.test(v) || this.invalidPhoneMsg)
-  },
+
    computed: {
     getFocus() {
-      return this.linkMode ? '':setTimeout(()=>this.$refs.edn_mail.focus())
+      return this.linkMode ? '':setTimeout(()=>this.$refs.edn_phone.focus())
     }
   },
-  inheritAttrs: false,
-  mixins: [ednRequired, ednVModel],
+  mounted() {
+    this.rules.push((v) => this.pattern.test(v) || this.invalidPhoneMsg)
+  }
 }
 </script>
