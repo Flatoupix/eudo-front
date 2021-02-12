@@ -497,6 +497,10 @@ var oCities: [
 
 # Changelog
 
+#### @0.1.46
+### `<edn-goto/>`
+- Mise à jour du comportement du mode édition du goto
+
 #### @0.1.45
 ### `<edn-phone/>`
 - Suppression du v-mask

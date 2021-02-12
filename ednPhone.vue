@@ -20,7 +20,11 @@
         </v-tooltip>
       </template>
     </v-text-field>
-    <edn-goto v-else @edit="exit($event);getFocus" linkMode="phone" :label="$attrs.label"> {{ content }} </edn-goto>
+    <edn-goto v-else @edit="exit($event);getFocus" linkMode="phone" :label="$attrs.label"> 
+       <template v-slot:editable>
+           {{ content }}
+       </template>  
+       </edn-goto>
   </div>
 </template>
 
@@ -60,7 +64,7 @@ export default {
       this.readyToConvert = !e
     },
     isMimic() {
-      this.linkMode = this.irisMimic && this.content.length > 0 && this.readyToConvert
+      this.linkMode = this.irisMimic && this.content?.length > 0 && this.readyToConvert
     },
     exit(e) {
        this.linkMode = e

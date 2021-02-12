@@ -61,7 +61,7 @@ export default {
       this.readyToConvert = !e
     },
     isMimic() {
-      this.linkMode = this.irisMimic && this.content.length > 0 && this.readyToConvert
+      this.linkMode = this.irisMimic && this.content?.length > 0 && this.readyToConvert
     },
     exit(e) {
        this.linkMode = e
