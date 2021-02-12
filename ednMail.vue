@@ -5,11 +5,12 @@
       @update:error="isReady($event)"
       v-model="content"
       type="text"
-      @blur="isMimic"
       v-bind="$attrs"
       :rules="rules"
-      v-if="!linkMode"
+      v-if="!irisMimic"
       :label="$attrs.label"
+      append-icon="mdi-close"
+      append-outer-icon="mdi-mail"
     >
       <template v-slot:append v-if="$attrs.tooltip">
         <v-tooltip top>
@@ -20,21 +21,27 @@
         </v-tooltip>
       </template>
     </v-text-field>
-    <edn-goto v-else @edit="exit($event);getFocus" linkMode="mail" :label="$attrs.label"> {{ content }} </edn-goto>
+    <!-- <edn-goto v-else @edit="exit($event);getFocus" linkMode="mail" :label="$attrs.label"> {{ content }} </edn-goto> -->
+    <edn-mimic v-bind="$attrs" :pattern="pattern" v-model="content" type="mail" v-else />
   </div>
 </template>
 
 <script>
 import { ednRequired } from './mixins/ednRequired'
 import { ednVModel } from './mixins/ednVModel'
+import ednMimic from './ednMimic'
+import { ednRegex } from './mixins/ednRegex'
 
 export default {
+  components: {
+    ednMimic,
+  },
   props: {
     irisMimic: {
       type: Boolean,
       default: () => false,
     },
-    invalidMailMsg: {
+    invalidMsg: {
       type: String,
       default: () => 'Vous devez entrer une adresse mail valide.',
     },
@@ -51,31 +58,18 @@ export default {
       linkMode: false,
     }
   },
-  mixins: [ednRequired, ednVModel],
+  mixins: [ednRequired, ednVModel,ednRegex],
   inheritAttrs: false,
   methods: {
-    changeToLink() {
-      this.linkContent = this.content
-    },
-    isReady(e) {
-      this.readyToConvert = !e
-    },
-    isMimic() {
-      this.linkMode = this.irisMimic && this.content.length > 0 && this.readyToConvert
-    },
-    exit(e) {
-       this.linkMode = e
-    },
   },
-
   computed: {
     getFocus() {
       return this.linkMode ? '':setTimeout(()=>this.$refs.edn_mail.focus())
     }
   },
-  mounted() {
-    this.rules.push((v) => (v && this.pattern.test(v)) || this.invalidMailMsg)
-  },
+  // mounted() {
+  //   this.rules.push((v) => (v && this.pattern.test(v)) || this.invalidMailMsg)
+  // },
 }
 </script>
 
