@@ -4,11 +4,9 @@
       ref="edn_mail"
       @update:error="isReady($event)"
       v-model="content"
-      type="text"
       v-bind="$attrs"
       :rules="rules"
       v-if="!irisMimic"
-      :label="$attrs.label"
       append-icon="mdi-close"
       append-outer-icon="mdi-mail"
     >
@@ -21,7 +19,6 @@
         </v-tooltip>
       </template>
     </v-text-field>
-    <!-- <edn-goto v-else @edit="exit($event);getFocus" linkMode="mail" :label="$attrs.label"> {{ content }} </edn-goto> -->
     <edn-mimic v-bind="$attrs" :pattern="pattern" v-model="content" type="mail" v-else />
   </div>
 </template>
@@ -67,9 +64,6 @@ export default {
       return this.linkMode ? '':setTimeout(()=>this.$refs.edn_mail.focus())
     }
   },
-  // mounted() {
-  //   this.rules.push((v) => (v && this.pattern.test(v)) || this.invalidMailMsg)
-  // },
 }
 </script>
 

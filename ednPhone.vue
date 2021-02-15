@@ -4,12 +4,10 @@
       ref="edn_phone"
       @update:error="isReady($event)"
       v-model="content"
-      type="phone"
       @blur="isMimic"
       v-bind="$attrs"
       :rules="rules"
-      v-if="!linkMode"
-      :label="$attrs.label"
+      v-if="!irisMimic"
     >
       <template v-slot:append v-if="$attrs.tooltip">
         <v-tooltip top>
@@ -20,19 +18,19 @@
         </v-tooltip>
       </template>
     </v-text-field>
-    <edn-goto v-else @edit="exit($event);getFocus" linkMode="phone" :label="$attrs.label"> 
-       <template v-slot:editable>
-           {{ content }}
-       </template>  
-       </edn-goto>
+    <edn-mimic v-bind="$attrs" :pattern="pattern" v-model="content" type="phone" v-else />
   </div>
 </template>
 
 <script>
 import { ednRequired } from './mixins/ednRequired'
 import { ednVModel } from './mixins/ednVModel'
+import ednMimic from './ednMimic'
 
 export default {
+  components: {
+    ednMimic,
+  },
   props: {
     irisMimic: {
       type: Boolean,
@@ -47,16 +45,16 @@ export default {
       default: () => /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
     },
   },
-   data() {
+  data() {
     return {
       linkContent: '',
       readyToConvert: true,
       linkMode: false,
     }
   },
-    mixins: [ednRequired, ednVModel],
-    inheritAttrs: false,
-    methods: {
+  mixins: [ednRequired, ednVModel],
+  inheritAttrs: false,
+  methods: {
     changeToLink() {
       this.linkContent = this.content
     },
@@ -67,17 +65,17 @@ export default {
       this.linkMode = this.irisMimic && this.content?.length > 0 && this.readyToConvert
     },
     exit(e) {
-       this.linkMode = e
+      this.linkMode = e
     },
   },
 
-   computed: {
+  computed: {
     getFocus() {
-      return this.linkMode ? '':setTimeout(()=>this.$refs.edn_phone.focus())
-    }
+      return this.linkMode ? '' : setTimeout(() => this.$refs.edn_phone.focus())
+    },
   },
   mounted() {
-    this.rules.push((v) => this.pattern.test(v) || this.invalidPhoneMsg)
-  }
+    this.rules.push(v => this.pattern.test(v) || this.invalidPhoneMsg)
+  },
 }
 </script>

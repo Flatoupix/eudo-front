@@ -4,16 +4,12 @@
       <v-col cols="10">
         <v-text-field
           id="urlToCopy"
-          :label="$attrs.label"
-          :readonly="$attrs.readonly"
           :prepend-inner-icon="valid ? 'mdi-earth' : 'mdi-earth-off'"
-          type="text"
           v-model="content"
           v-bind="$attrs"
           v-on="$listeners"
           :rules="rules"
           :clearable="!$attrs.readonly === ''"
-          :placeholder="placeHolder"
           :outlined="$attrs.readonly === ''"
           :class="$attrs.readonly === '' ? 'text--disabled' : ''"
           @blur="errorTest()"

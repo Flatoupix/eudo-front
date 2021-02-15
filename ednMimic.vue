@@ -1,7 +1,5 @@
 <template>
   <div class="d-flex justify-start edn-mimic">
-    <!-- <v-row align-content="center" class="d-flex justify-center">
-    <v-col :cols="getCols"> -->
     <v-text-field
       :id="$attrs.id"
       ref="txtField"
@@ -40,18 +38,11 @@
       :linkMode="type"
       :label="$attrs.label"
     >
-      {{ content }}
+      <template v-slot:editable>
+        {{ content }}
+      </template>
     </edn-goto>
-    <!-- </v-col> -->
-    <!-- <v-col
-      v-if="outerIconAdded"
-      cols="2"
-      :align-self="$attrs.readonly == '' ? 'start' : 'center'"
-      :class="['text-center', $attrs.readonly == '' ? 'mt-4' : '']"
-    > -->
     <slot name="outer-icon"></slot>
-    <!-- </v-col>
-  </v-row> -->
   </div>
 </template>
 
@@ -59,33 +50,13 @@
 import { ednRequired } from './mixins/ednRequired'
 import { ednVModel } from './mixins/ednVModel'
 import { ednRegex } from './mixins/ednRegex'
+import { ednSocialIcon } from './mixins/ednSocialIcon'
 
 export default {
   name: 'ednMimic',
   inheritAttrs: false,
-  mixins: [ednRequired, ednVModel, ednRegex],
+  mixins: [ednRequired, ednVModel, ednRegex, ednSocialIcon],
   props: {
-    wrongUrlMsg: {
-      type: String,
-      default: () => 'Vous devez entrer une url valide.',
-    },
-    // placeHolder: {
-    //   type: String,
-    //   default: () => 'http://',
-    // },
-    // regex: {
-    //   type: RegExp,
-    //   default: () =>
-    //     /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/,
-    // },
-    // linkMode: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    // focused: {
-    //   type: Boolean,
-    //   default: false,
-    // },
     type: {
       type: String,
       default: () => 'url',
@@ -97,33 +68,19 @@ export default {
       readyToConvert: true,
       linkMode: false,
       focused: false,
-      arrSocial: ['twitter', 'linkedin', 'facebook'],
       invalidMsgs: '',
-      socialIcon:null
+      invalidMsg:'',
+      oInvalidMsg: {
+        mail: 'Vous devez entrer une adresse mail valide.',
+        url: 'Vous devez entrer une url valide.',
+        phone: 'Vous devez entrer un numéro de téléphone valide.',
+      },
     }
   },
   mounted() {
-    // this.rules.push(content => this.regex.test(content) || this.wrongUrlMsg)
-    // this.valid = this.regex.test(this.content)
-    this.invalidMsgs = this.oInvalidMsg[this.type];
+    this.invalidMsg = this.oInvalidMsg[this.type]
   },
   computed: {
-    // getCols() {
-    //   return this.$slots['outer-icon']?.length > 0 ? '10' : '12'
-    // },
-    getPrepIcon: {
-      // return this.prepIcon ? this.prepIcon
-      //   : this.arrSocial.find(x => this.content.includes(x))
-      //   && this.linkMode
-      //   ? 'mdi-'+ this.arrSocial.find(x => this.content.includes(x))
-      //   : ''
-      get: function() {
-        return this.socialIcon ? this.socialIcon  : ''
-      },
-      set: function(newValue) {
-        this.socialIcon = newValue
-      },
-    },
     outerIconAdded() {
       return this.$slots['outer-icon']?.length > 0
     },
@@ -132,11 +89,6 @@ export default {
     content() {
       this.valid = this.pattern.test(this.content)
     },
-    // async focused() {
-    //   await this.$nextTick();
-    //   if(this.focused)
-    //     this.$refs?.txtField?.focus()
-    // },
   },
   methods: {
     isReady(e) {
@@ -150,10 +102,9 @@ export default {
     },
     isMimic(bVal = true) {
       this.linkMode = bVal && this.content.length > 0 && this.readyToConvert
-      if(this.linkMode && this.arrSocial.find(x => this.content.includes(x)))
-        this.socialIcon = 'mdi-'+ this.arrSocial.find(x => this.content.includes(x))
-      else
-        this.socialIcon = ''
+      if (this.arrSocial.find(x => this.content.includes(x)))
+        this.socialIcon = 'mdi-' + this.arrSocial.find(x => this.content.includes(x))
+      else this.socialIcon = ''
     },
   },
 }

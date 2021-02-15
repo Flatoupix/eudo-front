@@ -86,6 +86,7 @@ N'éspérez pas utiliser eudo-front sur un projet from scratch.
   - [Switches `<edn-switch>`](#edn-switch)
   - [Bouton `<edn-btn>`](#edn-btn)
   - [Color-picker `<edn-color>`](#edn-color)
+  - [Mimic `<edn-mimic>`](#edn-mimic)
 - Les coordonnées
   - [Téléphone `<edn-phone>`](#edn-phone)
   - [E-Mail `<edn-mail>`](#edn-mail)
@@ -338,16 +339,17 @@ var oCities: [
 
 ## <a name="edn-phone"></a> Téléphone `<edn-phone/>`
 
-|    Paramètre     |   Type   |     |
-| :--------------: | :------: | :-: |
-|   **tooltip:**   | `String` |     |
-| **placeholder:** | `String` |     |
-|    **label:**    | `String` |     |
-|  **required:**   |  `Bool`  |     |
-|   **:pattern**   | `Regex`  |     |
-|  **:irisMimic**  |  `Bool`  |     |
+|    Paramètre     |   Type   |                                           |
+| :--------------: | :------: | :---------------------------------------: |
+|   **tooltip:**   | `String` |                                           |
+| **placeholder:** | `String` |                                           |
+|    **label:**    | `String` |                                           |
+|  **required:**   |  `Bool`  |                                           |
+|   **:pattern**   | `Regex`  |                                           |
+|  **irisMimic**   |  `Bool`  | Reproduit le comportement des champs Iris |
 
 #### Format
+
 ```
 (123) 456-7890
 (123)456-7890
@@ -359,23 +361,25 @@ var oCities: [
 ```
 
 #### Exemple
+
 ```html
-<edn-phone :label="Votre numéro de téléphone"/>
+<edn-phone :label="Votre numéro de téléphone" />
 ```
 
 ---
 
 ## <a name="edn-url"></a> Page web `<edn-url/>`
 
-|      Paramètre       |   Type   |                                  |
-| :------------------: | :------: | -------------------------------- |
-|      **label:**      | `String` |                                  |
-|    **readonly:**     |  `Bool`  |                                  |
-|    **disabled:**     |  `Bool`  |                                  |
-| **pasteContentRes:** | `String` | Message de confirmation de copie |
-|   **wrongUrlMsg:**   | `String` | Message d'url erronée            |
-|    **regexUrl:**     | `String` | Regex personnalisable            |
-|     **@onError**     |  `Bool`  | Etat des erreurs du champ        |
+|      Paramètre       |   Type   |                                           |
+| :------------------: | :------: | ----------------------------------------- |
+|      **label:**      | `String` |                                           |
+|    **readonly:**     |  `Bool`  |                                           |
+|    **disabled:**     |  `Bool`  |                                           |
+| **pasteContentRes:** | `String` | Message de confirmation de copie          |
+|   **wrongUrlMsg:**   | `String` | Message d'url erronée                     |
+|    **regexUrl:**     | `String` | Regex personnalisable                     |
+|     **@onError**     |  `Bool`  | Etat des erreurs du champ                 |
+|    **irisMimic**     |  `Bool`  | Reproduit le comportement des champs Iris |
 
 #### Exemple
 
@@ -414,15 +418,15 @@ var oCities: [
 
 ## <a name="edn-mail"></a> E-mail `<edn-mail/>`
 
-|     Paramètre      |       Type       |                                                              |
-| :----------------: | :--------------: | ------------------------------------------------------------ |
-|     **label**      |     `String`     |                                                              |
-|    **required**    | `Bool ou String` |                                                              |
-|   **irisMimic**    |      `Bool`      | Imite le comportement des champs dans le nouveau mode fiche. |
-| **invalidMailMsg** |     `String`     |                                                              |
-|    **readonly**    |      `Bool`      |                                                              |
-|    **disabled**    |      `Bool`      |                                                              |
-|    **:pattern**    |     `Regex`      |                                                              |
+|     Paramètre      |       Type       |                                           |
+| :----------------: | :--------------: | ----------------------------------------- |
+|     **label**      |     `String`     |                                           |
+|    **required**    | `Bool ou String` |                                           |
+|   **irisMimic**    |      `Bool`      | Reproduit le comportement des champs Iris |
+| **invalidMailMsg** |     `String`     |                                           |
+|    **readonly**    |      `Bool`      |                                           |
+|    **disabled**    |      `Bool`      |                                           |
+|    **:pattern**    |     `Regex`      |                                           |
 
 #### Exemple
 
@@ -493,16 +497,51 @@ var oCities: [
 <edn-goto label="edn-goto"></edn-goto>
 ```
 
+## <a name="edn-mimic"></a> Mimic `<edn-mimic/>`
+
+|  Paramètre   |   Type   |              Description              |
+| :----------: | :------: | :-----------------------------------: |
+|  **type:**   | `String` | `'phone'` `'mail'` `'social'` `'url'` |  |
+| **pattern:** | `Regex`  |
+
+#### Exemple
+
+```html
+<edn-mimic type="mail" pattern="regexPattern"></edn-mimic>
+```
+
+---
+
+## Future Features
+
+1. Automatiser la génération des icônes des réseaux sociaux
+2. Ajouter un composant d'interpretation de timeline pas-à-pas
+
 ---
 
 # Changelog
 
-#### @0.1.46
+#### @0.1.47
+
+### `<edn-mimic/>` _new_
+
+- Ajout du composant edn-mimic qui reproduit les comportements des champs email, url, social et téléphone du nouveau mode fiche.
+- Ajout d'une mixin (ednSocialIcon) pour gérer les icônes des réseaux sociaux réactifs sur le composant edn-mimic et edn-goto.
+
 ### `<edn-goto/>`
+
+- Modification du composant edn-goto : redirection vers une url, liaison avec la mixin ednSocialIcon.
+
+#### @0.1.46
+
+### `<edn-goto/>`
+
 - Mise à jour du comportement du mode édition du goto
 
 #### @0.1.45
+
 ### `<edn-phone/>`
+
 - Suppression du v-mask
 - Ajout d'une Regex avec les formats les plus répandus
 - Ajout de la mimic Iris
