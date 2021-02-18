@@ -1,2 +1,13 @@
-.p-absolute
-  position absolute
+positions = absolute fixed relative static sticky
+events = auto none
+cursors = pointer
+
+concatClass(class,prop,values)
+  for value in values
+    .{class}-{value}
+      {prop} value
+
+concatClass(pos,position, positions)
+concatClass(evts,pointer-events, events)
+concatClass(cur, cursor,cursors)
+
