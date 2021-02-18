@@ -13,12 +13,14 @@
       <v-text-field
         :ename="$attrs.ename"
         :id="$attrs.id"
-        :disabled="$attrs.disabled"
+        :disabled="$attrs.disabled || getIrisRdonlyMode"
+        :filled="getIrisRdonlyMode"
         :label="$attrs.label"
         v-model="getFormattedDate"
         v-on="on"
         :rules="rules"
         :placeholder="$attrs.placeholder"
+        :append-icon="getAppendedIcon"
       ></v-text-field>
     </template>
     <v-date-picker
@@ -54,10 +56,11 @@
 import { ednRequired } from './mixins/ednRequired'
 import { ednVModel } from './mixins/ednVModel'
 import { format as fnsFormat, parseISO as fnsParseISO, isValid as fnsIsValid, parse as fnsParse } from 'date-fns'
+import { ednMimicMix } from './mixins/ednMimicMix'
 
 export default {
   inheritAttrs: false,
-  mixins: [ednRequired, ednVModel],
+  mixins: [ednRequired, ednVModel, ednMimicMix],
   props: {
     format: {
       type: String,

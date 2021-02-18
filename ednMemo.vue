@@ -1,7 +1,16 @@
 <template>
   <div v-if="$attrs.html == '' || $attrs.html" class="cstmMemo">
-    <div :class="['cstmQl', $attrs.disabled ? 'disabled' : '']" v-bind="$attrs">
-      <v-input :rules="rules" v-model="content" :label="$attrs.label">
+    <div
+      :class="['cstmQl', $attrs.disabled ? 'disabled' : '', getIrisRdonlyMode ? 'iris-readonly' : '']"
+      v-bind="$attrs"
+    >
+      <v-input
+        :disabled="getIrisRdonlyMode"
+        :filled="getIrisRdonlyMode"
+        :rules="rules"
+        v-model="content"
+        :label="$attrs.label"
+      >
         <quill-editor
           :ename="$attrs.ename"
           :id="$attrs.id"
@@ -10,11 +19,16 @@
           v-model="content"
           :options="editorOption"
         />
+        <v-icon>{{ getAppendedIcon }}</v-icon>
       </v-input>
     </div>
   </div>
   <div v-else>
     <v-textarea
+      :no-resize="getIrisRdonlyMode"
+      :class="getMemoCssClass"
+      :disabled="getIrisRdonlyMode"
+      :filled="getIrisRdonlyMode"
       :required="$attrs.required"
       :maxlength="$attrs.maxlength"
       :rows="$attrs.rows"
@@ -24,8 +38,10 @@
       :rules="rules"
       :ename="$attrs.ename"
       :id="$attrs.id"
+      :append-icon="getAppendedIcon"
+      :readonly="$attrs.readonly === ''"
     >
-      <template v-slot:append v-if="$attrs.tooltip">
+      <template v-slot:[getSlotName] v-if="$attrs.tooltip">
         <v-tooltip top>
           <template v-slot:activator="{ on }">
             <v-icon v-on="on" style="cursor: pointer">mdi-help-circle-outline</v-icon>
@@ -47,12 +63,25 @@ import 'quill/dist/quill.bubble.css'
 
 import { ednRequired } from './mixins/ednRequired'
 import { ednVModel } from './mixins/ednVModel'
+import { ednMimicMix } from './mixins/ednMimicMix'
 
 export default {
   inheritAttrs: false,
-  mixins: [ednRequired, ednVModel],
+  mixins: [ednRequired, ednVModel, ednMimicMix],
   components: {
     quillEditor,
+  },
+  computed: {
+    /**
+     * Récupère le nom du slot et place le tooltip
+     * différemment si on a le cadenas ou pas
+     */
+    getSlotName() {
+      return this.getAppendedIcon ? 'append-outer' : 'append'
+    },
+    getMemoCssClass() {
+      return this.getIrisRdonlyMode ? 'iris-memo' : ''
+    },
   },
   data() {
     return {
@@ -180,5 +209,34 @@ div.cstmQl {
 
 .v-input textarea {
   word-break: normal;
+}
+
+.iris-readonly .ql-container.ql-snow {
+    background: #f0f0f0;
+}
+
+// style propre à irisMimic
+
+.theme--light.v-text-field--filled:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot:hover
+  background: rgba(0, 0, 0, 0.06);
+
+.iris-readonly[html] i.v-icon.notranslate.mdi.mdi-lock.theme--light{
+    position: absolute;
+    right: 11px;
+    top: 30px;
+}
+
+.v-input--is-disabled:not(.v-input--is-readonly).iris-memo{
+    pointer-events:auto;
+}
+
+.v-application--is-ltr .v-text-field.iris-memo .v-input__append-inner
+  position: absolute;
+  right: 9px;
+  top: -9px;
+  pointer-events:none
+
+.v-textarea.v-text-field--enclosed.iris-memo textarea{
+  margin-top:32px;
 }
 </style>

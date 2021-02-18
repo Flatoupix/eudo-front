@@ -1,20 +1,22 @@
 <template>
   <div class="d-flex justify-start edn-mimic">
     <v-text-field
+      :disabled="$attrs.readonly === ''"
+      :filled="$attrs.readonly === ''"
       :id="$attrs.id"
       ref="txtField"
       v-if="!linkMode"
       :label="$attrs.label"
       :readonly="$attrs.readonly"
       :prepend-inner-icon="getPrepIcon"
+      :append-icon="getAppendedIcon"
       type="text"
       @update:error="isReady($event)"
       v-model="content"
       v-bind="$attrs"
       v-on="$listeners"
-      :rules="rules"
+      :rules="$attrs.rules"
       :clearable="!$attrs.readonly === ''"
-      :outlined="$attrs.readonly === ''"
       :class="$attrs.readonly === '' ? 'text--disabled' : ''"
       class="flex-grow-1"
       autocomplete="off"
@@ -84,6 +86,9 @@ export default {
     outerIconAdded() {
       return this.$slots['outer-icon']?.length > 0
     },
+    getAppendedIcon(){
+      return this.$attrs.readonly === ''? 'mdi-lock': ''
+    }
   },
   watch: {
     content() {

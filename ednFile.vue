@@ -1,28 +1,34 @@
 <template>
-  <v-file-input
-    v-on="$listeners"
-    :label="$attrs.label"
-    :rules="rules"
-    :show-size="true"
-    :accept="acceptFormat"
-    :value="value instanceof Object && value.size > 0 ? value : undefined"
-    @change="selectFile($event)"
-    @click:clear="image = null"
-    ref="fileUpload"
-    v-bind="$attrs"
-  >
-    <template v-slot:selection="{ text }">
-      {{ text.split('(')[0] + text.slice(text.indexOf('(')).replace('B', 'o') }}
-    </template>
-  </v-file-input>
+  <div>
+    <v-file-input
+      :disabled="getIrisRdonlyMode"
+      :filled="getIrisRdonlyMode"
+      v-on="$listeners"
+      :label="$attrs.label"
+      :rules="rules"
+      :show-size="true"
+      :accept="acceptFormat"
+      :value="value instanceof Object && value.size > 0 ? value : undefined"
+      @change="selectFile($event)"
+      @click:clear="image = null"
+      ref="fileUpload"
+      v-bind="$attrs"
+      :append-icon="getAppendedIcon"
+    >
+      <template v-slot:selection="{ text }">
+        {{ text.split('(')[0] + text.slice(text.indexOf('(')).replace('B', 'o') }}
+      </template>
+    </v-file-input>
+  </div>
 </template>
 
 <script>
 import { ednRequired } from './mixins/ednRequired'
+import { ednMimicMix } from './mixins/ednMimicMix'
 
 export default {
   inheritAttrs: false,
-  mixins: [ednRequired],
+  mixins: [ednRequired, ednMimicMix],
   props: {
     value: null,
 
