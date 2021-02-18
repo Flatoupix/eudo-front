@@ -20,7 +20,7 @@
       :class="$attrs.rdonly === '' ? 'text--disabled' : ''"
       class="flex-grow-1"
       autocomplete="off"
-      @blur="isMimic()"
+      @blur="isMimic()" 
     >
       <template v-slot:append v-if="$attrs.tooltip">
         <v-tooltip top>
@@ -73,7 +73,7 @@ export default {
       invalidMsgs: '',
       invalidMsg:'',
       oInvalidMsg: {
-        mail: 'Vous devez entrer une adresse mail valide.',
+        mail: 'Vous devez entrer une adresse mail valide. ',
         url: 'Vous devez entrer une url valide.',
         phone: 'Vous devez entrer un numéro de téléphone valide.',
       },
