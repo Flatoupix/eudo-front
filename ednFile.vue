@@ -1,6 +1,8 @@
 <template>
   <div>
     <v-file-input
+      :prepend-inner-icon="getPrependedInnerIcon"
+      :prepend-icon="getPrependedIcon"
       :disabled="getIrisRdonlyMode"
       :filled="getIrisRdonlyMode"
       v-on="$listeners"
@@ -92,11 +94,25 @@ export default {
       if (img.size) {
         const reader = new FileReader()
         reader.readAsDataURL(img)
-        reader.onload = (e) => {
+        reader.onload = e => {
           this.image = e.target.result
           this.$emit('getImage', this.image)
         }
       }
+    },
+  },
+  computed: {
+    /**
+     * Si on est en mimic et readonly, on n'affiche pas l'icône paper-clip là ($file est
+     * l'icône par défaut de la props )
+     */
+    getPrependedInnerIcon() {
+      if (!this.getIrisRdonlyMode) return ''
+      else return 'mdi-paperclip'
+    },
+    getPrependedIcon() {
+      if (!this.getIrisRdonlyMode) return '$file'
+      else return ''
     },
   },
   mounted() {
@@ -107,4 +123,4 @@ export default {
 }
 </script>
 
-<style lang='stylus' scoped></style>
+<style lang="stylus" scoped></style>

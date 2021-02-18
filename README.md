@@ -98,6 +98,7 @@ N'éspérez pas utiliser eudo-front sur un projet from scratch.
   - [Page Web `<edn-url>`](#edn-url)
   - [Fichier `<edn-file>`](#edn-file)
   - Loader
+  - [Tooltip `<edn-tooltip>`](#edn-tooltip)
 - Les utilisateurs
   - Utilisateurs
   - Groupe
@@ -497,7 +498,7 @@ var oCities: [
 <edn-goto label="edn-goto"></edn-goto>
 ```
 
-## <a name="edn-v-stepper"></a> Mimic `<edn-v-stepper/>`
+## <a name="edn-v-stepper"></a> Stepper `<edn-v-stepper/>`
 
 |   Paramètre   |   Type   |            Description             |
 | :-----------: | :------: | :--------------------------------: |
@@ -511,6 +512,14 @@ var oCities: [
 <edn-v-stepper  :progress="progress" :steps="itemsTimeLine"></edn-v-stepper>
 ```
 
+## <a name="edn-tooltip"></a> Tooltip `<edn-tooltip/>`
+
+#### Exemple
+
+```html
+<edn-tooltip><slot></slot></edn-tooltip>
+```
+
 ---
 
 ## Future Features
@@ -521,6 +530,19 @@ var oCities: [
 ---
 
 # Changelog
+
+#### @0.1.49
+
+Mise à jour des classes raccourcies dans le syles.styl
+### `<edn-tooltip/>` _new_
+ - Création du composant <edn-tooltip/> partagé par les composants File, Memo, Num, Cat, etc.
+
+### `<edn-file/>`
+### `<edn-memo/>`
+### `<edn-num/>`
+### `<edn-cat/>`
+  - Ajout de la mimic Iris (nouveau mode fiche) en lecture seule
+  - Création de la mixin ednMimicMix pour les mimic et lecture seule 
 
 #### @0.1.48
 

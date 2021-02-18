@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-input @click="$emit('edit', false)" v-if="$slots.editable" class="v-text-field ml-0">
-      <label v-bind="$attrs" class="v-label v-label--active theme--light p-absolute">{{ $attrs.label }}</label>
+      <label v-bind="$attrs" class="v-label v-label--active theme--light pos-absolute">{{ $attrs.label }}</label>
       <v-icon>{{ prepIcon }}</v-icon>
       <a
         :class="getLinkMargins"

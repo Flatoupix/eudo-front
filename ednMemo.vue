@@ -42,12 +42,7 @@
       :readonly="$attrs.readonly === ''"
     >
       <template v-slot:[getSlotName] v-if="$attrs.tooltip">
-        <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <v-icon v-on="on" style="cursor: pointer">mdi-help-circle-outline</v-icon>
-          </template>
-          {{ $attrs.tooltip }}
-        </v-tooltip>
+        <edn-tooltip> {{ $attrs.tooltip }}</edn-tooltip>
       </template>
     </v-textarea>
   </div>
@@ -64,12 +59,14 @@ import 'quill/dist/quill.bubble.css'
 import { ednRequired } from './mixins/ednRequired'
 import { ednVModel } from './mixins/ednVModel'
 import { ednMimicMix } from './mixins/ednMimicMix'
+import ednTooltip from './ednTooltip'
 
 export default {
   inheritAttrs: false,
   mixins: [ednRequired, ednVModel, ednMimicMix],
   components: {
     quillEditor,
+    ednTooltip
   },
   computed: {
     /**

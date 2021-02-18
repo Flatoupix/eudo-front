@@ -25,6 +25,7 @@ import EdnPopOver from './ednPopOver'
 import EdnGoto from './ednGoto'
 import EdnVStepper from './ednVStepper'
 import EdnMimic from './ednMimic'
+import EdnTooltip from './ednTooltip'
 require('./assets/styles.styl')
 
 console.log('eudo-front version ' + require('./package.json').version)
@@ -57,6 +58,7 @@ const eudoFront = {
     Vue.component('edn-goto', EdnGoto)
     Vue.component('edn-v-stepper', EdnVStepper)
     Vue.component('edn-mimic', EdnMimic)
+    Vue.component('edn-tooltip', EdnTooltip)
   },
 }
 
@@ -85,7 +87,8 @@ export {
   EdnPopOver,
   EdnGoto,
   EdnVStepper,
-  EdnMimic
+  EdnMimic,
+  EdnTooltip
 }
 
 export default eudoFront

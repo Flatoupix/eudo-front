@@ -26,12 +26,7 @@
   </v-autocomplete>
   <v-select :disabled="getIrisRdonlyMode" :filled="getIrisRdonlyMode" v-else :rules="rules" type="text" v-bind="$attrs" v-model="content" :items="$attrs.items">
     <template v-slot:append-outer v-if="tooltip">
-      <v-tooltip top>
-        <template v-slot:activator="{ on }">
-          <v-icon class="evt-auto" v-on="on" style="cursor: pointer">mdi-help-circle-outline</v-icon>
-        </template>
-        {{ tooltip }}
-      </v-tooltip>
+      <edn-tooltip> {{ tooltip }}</edn-tooltip>
     </template>
     <template v-slot:append v-if="getIrisRdonlyMode">
       <v-icon class="v-icon--disabled">mdi-menu-down</v-icon>
@@ -44,9 +39,13 @@
 import { ednRequired } from './mixins/ednRequiredMulti'
 import { ednVModel } from './mixins/ednVModel'
 import { ednMimicMix } from './mixins/ednMimicMix'
+import ednTooltip from './ednTooltip'
 
 export default {
   mixins: [ednRequired, ednVModel,ednMimicMix],
+  components: {
+    ednTooltip,
+  },
   inheritAttrs: false,
   props: {
     tooltip: String,

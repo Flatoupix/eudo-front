@@ -13,16 +13,8 @@
       :disabled="getIrisRdonlyMode"
       :filled="getIrisRdonlyMode"
     >
-      <!-- <template v-slot:[getSlotName] v-if="$attrs.tooltip">
-        <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <v-icon class="evt-auto" v-on="on" style="cursor: pointer">mdi-help-circle-outline</v-icon>
-          </template>
-          {{ $attrs.tooltip }}
-        </v-tooltip>
-      </template> -->
       <template v-slot:[getSlotName] v-if="$attrs.tooltip">
-          <edn-tooltip v-if="$attrs.tooltip"> {{ $attrs.tooltip }}</edn-tooltip>
+        <edn-tooltip> {{ $attrs.tooltip }}</edn-tooltip>
       </template>
     </v-text-field>
   </div>

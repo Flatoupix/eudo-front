@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex justify-start edn-mimic">
     <v-text-field
-      :disabled="$attrs.readonly === ''"
-      :filled="$attrs.readonly === ''"
+      :disabled="$attrs.rdonly === ''"
+      :filled="$attrs.rdonly === ''"
       :id="$attrs.id"
       ref="txtField"
       v-if="!linkMode"
       :label="$attrs.label"
-      :readonly="$attrs.readonly"
+      :rdonly="$attrs.rdonly"
       :prepend-inner-icon="getPrepIcon"
       :append-icon="getAppendedIcon"
       type="text"
@@ -16,8 +16,8 @@
       v-bind="$attrs"
       v-on="$listeners"
       :rules="$attrs.rules"
-      :clearable="!$attrs.readonly === ''"
-      :class="$attrs.readonly === '' ? 'text--disabled' : ''"
+      :clearable="!$attrs.rdonly === ''"
+      :class="$attrs.rdonly === '' ? 'text--disabled' : ''"
       class="flex-grow-1"
       autocomplete="off"
       @blur="isMimic()"
@@ -87,7 +87,7 @@ export default {
       return this.$slots['outer-icon']?.length > 0
     },
     getAppendedIcon(){
-      return this.$attrs.readonly === ''? 'mdi-lock': ''
+      return this.$attrs.rdonly === ''? 'mdi-lock': ''
     }
   },
   watch: {
@@ -115,7 +115,7 @@ export default {
 }
 </script>
 <style lang="stylus">
-div.v-input--is-readonly {
+div.v-input--is-rdonly {
   pointer-events: none;
   user-select: none;
 }
