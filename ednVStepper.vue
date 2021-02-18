@@ -1,5 +1,12 @@
 <template>
   <v-navigation-drawer floating permanent>
+    <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title text-center">
+            {{title}}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     <!-- <v-list-item dense> -->
     <v-progress-linear class="ma-4 flexContentDiv" :value="progress" height="20">
       <template v-slot:default="{ value }">
@@ -27,6 +34,10 @@
 <script>
 export default {
   props: {
+    title:{
+      type:String,
+      default:()=>''
+    },
     steps: {
       type: Array,
       default: () => [],

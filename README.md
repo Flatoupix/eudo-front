@@ -54,7 +54,7 @@ Vue.use(Vuetify)
 
 new Vue({
   vuetify: new Vuetify(opts),
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app')
 ```
 
@@ -497,17 +497,18 @@ var oCities: [
 <edn-goto label="edn-goto"></edn-goto>
 ```
 
-## <a name="edn-mimic"></a> Mimic `<edn-mimic/>`
+## <a name="edn-v-stepper"></a> Mimic `<edn-v-stepper/>`
 
-|  Paramètre   |   Type   |              Description              |
-| :----------: | :------: | :-----------------------------------: |
-|  **type:**   | `String` | `'phone'` `'mail'` `'social'` `'url'` |  |
-| **pattern:** | `Regex`  |
+|   Paramètre   |   Type   |            Description             |
+| :-----------: | :------: | :--------------------------------: |
+|  **title:**   | `String` |                                    |
+|  **steps:**   | `Array`  |   Tableau des différentés étapes   |
+| **progress:** | `Number` | Pourcentage des différentes étapes |
 
 #### Exemple
 
 ```html
-<edn-mimic type="mail" pattern="regexPattern"></edn-mimic>
+<edn-v-stepper  :progress="progress" :steps="itemsTimeLine"></edn-v-stepper>
 ```
 
 ---
@@ -515,11 +516,17 @@ var oCities: [
 ## Future Features
 
 1. Automatiser la génération des icônes des réseaux sociaux
-2. Ajouter un composant d'interpretation de timeline pas-à-pas
+2. ~~Ajouter un composant d'interpretation de timeline pas-à-pas~~
 
 ---
 
 # Changelog
+
+#### @0.1.48
+
+Mise à jour des classes raccourcies dans le syles.styl
+### `<edn-v-stepper/>` _new_
+ - Création du composant <edn-v-stepper/>
 
 #### @0.1.47
 
