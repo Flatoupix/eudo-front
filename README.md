@@ -535,7 +535,7 @@ var oCities: [
 
 Mise à jour des classes raccourcies dans le syles.styl
 ### `<edn-tooltip/>` _new_
- - Création du composant <edn-tooltip/> partagé par les composants File, Memo, Num, Cat, etc.
+ - Création du composant <edn-tooltip/> partagé par les composants File, Memo, Num, Cat, etc. 
 
 ### `<edn-file/>`
 ### `<edn-memo/>`
