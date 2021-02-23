@@ -531,6 +531,10 @@ var oCities: [
 
 # Changelog
 
+#### @0.1.50
+
+Ajout de la famille de police Cabin utilisée par les composants Iris Mimic
+
 #### @0.1.49
 
 Mise à jour des classes raccourcies dans le syles.styl
