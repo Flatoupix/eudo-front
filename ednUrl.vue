@@ -11,7 +11,7 @@
           :rules="rules"
           :clearable="!$attrs.readonly === ''"
           :outlined="$attrs.readonly === ''"
-          :class="$attrs.readonly === '' ? 'text--disabled' : ''"
+          :class="[$attrs.readonly === '' ? 'text--disabled' : '',getIrisCssClass]"
           @blur="errorTest()"
         >
           <template v-slot:append v-if="$attrs.tooltip">
@@ -48,7 +48,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <edn-mimic v-bind="$attrs" :pattern="regexUrl" v-model="content" type="url" v-else />
+    <edn-mimic :rules="rules" :class="getIrisCssClass" v-bind="$attrs" :pattern="regexUrl" v-model="content" type="url" v-else />
   </div>
 </template>
 
@@ -56,10 +56,11 @@
 import { ednRequired } from './mixins/ednRequired'
 import { ednVModel } from './mixins/ednVModel'
 import ednMimic from './ednMimic'
+import { ednMimicMix } from './mixins/ednMimicMix'
 
 export default {
   inheritAttrs: false,
-  mixins: [ednRequired, ednVModel],
+  mixins: [ednRequired, ednVModel, ednMimicMix ],
   components: {
     ednMimic,
   },

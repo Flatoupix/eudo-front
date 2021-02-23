@@ -1,6 +1,28 @@
+@font-face {
+    font-family: 'Cabin';
+    src: url('./fonts/cabin/Cabin-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cabin-Bold';
+    src: url('./fonts/cabin/Cabin-Bold.ttf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cabin-Medium';
+    src: url('./fonts/cabin/Cabin-Medium.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
 positions = absolute fixed relative static sticky
 events = auto none
 cursors = pointer
+fontFamily = 'Cabin', 'Cabin-Bold','Cabin-Medium'
 
 concatClass(class,prop,values)
   for value in values
@@ -10,4 +32,14 @@ concatClass(class,prop,values)
 concatClass(pos,position, positions)
 concatClass(evts,pointer-events, events)
 concatClass(cur, cursor,cursors)
+concatClass(ff, font-family,fontFamily)
+
+.v-input.iris-mimic,
+.iris-mimic .v-label
+  font-family:'Cabin'
+  font-size:18px;
+
+.iris-mimic .v-chip.v-size--small
+  font-family:'Cabin'
+  font-size:14px;
 

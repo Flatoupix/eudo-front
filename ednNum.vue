@@ -12,6 +12,7 @@
       @click:append="focusOnInput"
       :disabled="getIrisRdonlyMode"
       :filled="getIrisRdonlyMode"
+      :class="getIrisCssClass"
     >
       <template v-slot:[getSlotName] v-if="$attrs.tooltip">
         <edn-tooltip> {{ $attrs.tooltip }}</edn-tooltip>

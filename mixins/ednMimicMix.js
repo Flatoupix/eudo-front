@@ -9,6 +9,9 @@ export const ednMimicMix = {
     getIrisRdonlyMode() {
       return this.$attrs?.rdonly === '' && this.$attrs?.irisMimic === ''
     },
+    getIrisMode() {
+      return this.$attrs?.irisMimic === '' || this.irisMimic
+    },
     /**
      * Récupère le nom du slot et place le tooltip
      * différemment si on a le cadenas ou pas
@@ -16,6 +19,9 @@ export const ednMimicMix = {
     getSlotName() {
       return this.getAppendedIcon ? 'append-outer' : 'append'
     },
+    getIrisCssClass(){
+      return this.getIrisMode ? 'iris-mimic':''
+    }
   },
   methods: {
     focusOnInput() {

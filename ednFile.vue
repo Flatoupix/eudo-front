@@ -16,6 +16,7 @@
       ref="fileUpload"
       v-bind="$attrs"
       :append-icon="getAppendedIcon"
+      :class="getIrisCssClass"
     >
       <template v-slot:selection="{ text }">
         {{ text.split('(')[0] + text.slice(text.indexOf('(')).replace('B', 'o') }}

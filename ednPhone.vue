@@ -18,7 +18,7 @@
         </v-tooltip>
       </template>
     </v-text-field>
-    <edn-mimic v-bind="$attrs" :pattern="pattern" v-model="content" type="phone" v-else />
+    <edn-mimic :rules="rules" v-bind="$attrs" :pattern="pattern" v-model="content" type="phone" v-else />
   </div>
 </template>
 

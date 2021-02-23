@@ -1,21 +1,21 @@
 <template>
   <div>
-    <v-input @click="$emit('edit', false)" v-if="$slots.editable" class="v-text-field ml-0">
+    <v-input @click="$emit('edit', false)" v-if="$slots.editable" class="v-text-field ml-0 iris-mimic">
       <label v-bind="$attrs" class="v-label v-label--active theme--light pos-absolute">{{ $attrs.label }}</label>
       <v-icon>{{ prepIcon }}</v-icon>
       <a
         :class="getLinkMargins"
         target="getOpeningMode"
-        class="linkIris input py-1"
+        class="linkIris input"
         :href="goTo"
-        style="cursor: pointer; color: var(--v-link-base)"
+        style="color: var(--v-link-base)"
       >
         <slot name="editable"></slot>
       </a>
       <v-spacer></v-spacer>
       <v-icon @click.stop="$emit('edit', false)">mdi-pencil</v-icon>
     </v-input>
-    <a v-else target="_blank" class="linkIris" :href="goTo" style="cursor: pointer; color: var(--v-link-base)">
+    <a v-else target="_blank" class="linkIris" :href="goTo" style="color: var(--v-link-base)">
       <slot></slot>
     </a>
   </div>
@@ -67,6 +67,8 @@ export default {
 
 <style lang="stylus">
 a.linkIris {
+  padding:3px 0 2px 0;
+  cursor:pointer;
   label {
     position: absolute;
   }

@@ -77,7 +77,7 @@ export default {
       return this.getAppendedIcon ? 'append-outer' : 'append'
     },
     getMemoCssClass() {
-      return this.getIrisRdonlyMode ? 'iris-memo' : ''
+      return this.getIrisRdonlyMode ? 'iris-memo iris-mimic' : this.getIrisMode ? 'iris-mimic':''
     },
   },
   data() {

@@ -9,22 +9,31 @@
     :items="$attrs.items"
     :disabled="getIrisRdonlyMode"
     :filled="getIrisRdonlyMode"
+    :class="getIrisCssClass"
   >
     <template v-slot:selection="{ item }">
-      <v-chip outlined close label :input-value="item.selected" @click:close="remove(item)">
+      <v-chip :small="getIrisMode" :outlined="!getIrisMode" :text-color="getIrisChipTxtColor" :close="!getIrisRdonlyMode" :color="getIrisChipColor" label :input-value="item.selected" @click:close="remove(item)">
         {{ typeof item === 'object' ? item.text : item }}
       </v-chip>
     </template>
-    <template v-slot:append-outer-icon v-if="tooltip">
-      <v-tooltip top>
-        <template v-slot:activator="{ on }">
-          <v-icon v-on="on" style="cursor: pointer">mdi-help-circle-outline</v-icon>
-        </template>
-        {{ tooltip }}
-      </v-tooltip>
+    <template v-slot:append-outer v-if="tooltip">
+      <edn-tooltip> {{ tooltip }}</edn-tooltip>
+    </template>
+    <template v-slot:append v-if="getIrisRdonlyMode">
+      <v-icon class="v-icon--disabled">mdi-menu-down</v-icon>
+      <v-icon class="v-icon--disabled">mdi-lock</v-icon>
     </template>
   </v-autocomplete>
-  <v-select :disabled="getIrisRdonlyMode" :filled="getIrisRdonlyMode" v-else :rules="rules" type="text" v-bind="$attrs" v-model="content" :items="$attrs.items">
+  <v-select
+    :disabled="getIrisRdonlyMode"
+    :filled="getIrisRdonlyMode"
+    v-else
+    :rules="rules"
+    type="text"
+    v-bind="$attrs"
+    v-model="content"
+    :items="$attrs.items"
+  >
     <template v-slot:append-outer v-if="tooltip">
       <edn-tooltip> {{ tooltip }}</edn-tooltip>
     </template>
@@ -42,13 +51,21 @@ import { ednMimicMix } from './mixins/ednMimicMix'
 import ednTooltip from './ednTooltip'
 
 export default {
-  mixins: [ednRequired, ednVModel,ednMimicMix],
+  mixins: [ednRequired, ednVModel, ednMimicMix],
   components: {
     ednTooltip,
   },
   inheritAttrs: false,
   props: {
     tooltip: String,
+  },
+  computed: {
+    getIrisChipColor(){
+      return this.getIrisRdonlyMode ? 'grey lighten-2': this.getIrisMode ? 'grey lighten-1':''
+    },
+    getIrisChipTxtColor(){
+      return this.getIrisRdonlyMode ? 'grey darken-2': this.getIrisMode ? 'grey darken-3':''
+    }
   },
   methods: {
     remove(item) {
@@ -66,3 +83,9 @@ export default {
   },
 }
 </script>
+<style lang='stylus' >
+.v-input.iris-mimic .v-label.v-label--active
+    line-height: 5px;
+    overflow: visible;
+ 
+</style>

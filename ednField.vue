@@ -1,5 +1,5 @@
 <template>
-  <v-text-field type="text" v-model="content" v-bind="$attrs" :rules="rules">
+  <v-text-field :append-icon="getAppendedIcon" :class="getIrisCssClass" :disabled="getIrisRdonlyMode" :filled="getIrisRdonlyMode" type="text" v-model="content" v-bind="$attrs" :rules="rules">
     <template v-slot:append v-if="$attrs.tooltip">
       <v-tooltip top>
         <template v-slot:activator="{ on }">
@@ -16,9 +16,10 @@
 <script>
 import { ednRequired } from "./mixins/ednRequired";
 import { ednVModel } from "./mixins/ednVModel";
+import { ednMimicMix } from './mixins/ednMimicMix'
 
 export default {
   inheritAttrs: false,
-  mixins: [ednRequired, ednVModel],
+  mixins: [ednRequired, ednVModel,ednMimicMix],
 };
 </script>
