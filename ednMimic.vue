@@ -106,9 +106,9 @@ export default {
       this.linkContent = this.content
     },
     isMimic(bVal = true) {
-      this.linkMode = bVal && this.content.length > 0 && this.readyToConvert
-      if (this.arrSocial.find(x => this.content.includes(x)))
-        this.socialIcon = 'mdi-' + this.arrSocial.find(x => this.content.includes(x))
+      this.linkMode = bVal && this.content?.length > 0 && this.readyToConvert
+      if (this.arrSocial.find(x => this.content?.includes(x)))
+        this.socialIcon = 'mdi-' + this.arrSocial?.find(x => this.content?.includes(x))
       else this.socialIcon = ''
     },
   },
